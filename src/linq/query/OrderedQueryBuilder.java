@@ -32,12 +32,12 @@ public class OrderedQueryBuilder<T> extends QueryBuilderBase<T> {
         }
     }
 
-    public <TTarget> Collection<TTarget> select(Func<T, TTarget> converter) {
+    public <TTarget> ArrayList<TTarget> select(Func<T, TTarget> converter) {
         orderElements();
         return super.select(converter);
     }
 
-    public Collection<T> select() {
+    public ArrayList<T> select() {
         orderElements();
         return super.select();
     }

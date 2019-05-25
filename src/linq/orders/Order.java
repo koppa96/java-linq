@@ -14,7 +14,7 @@ public class Order<T> {
         this.direction = direction;
     }
 
-    public Collection<T> execute(Collection<T> unorderedCollection) {
+    public ArrayList<T> execute(Collection<T> unorderedCollection) {
         var orderedCollection = new ArrayList<T>();
 
         for (var element : unorderedCollection) {

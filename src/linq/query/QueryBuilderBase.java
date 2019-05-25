@@ -1,6 +1,7 @@
 package linq.query;
 
 import linq.Func;
+import linq.exceptions.TooManyElementsException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -54,7 +55,7 @@ public abstract class QueryBuilderBase<T> {
 
     public T first() {
         if (source.isEmpty()) {
-            throw new IllegalStateException("The collection is empty.");
+            throw new NoSuchElementException("The collection is empty.");
         }
 
         return source.get(0);
@@ -67,14 +68,14 @@ public abstract class QueryBuilderBase<T> {
             }
         }
 
-        throw new IllegalStateException("There was no such element in the list.");
+        throw new NoSuchElementException("There are no elements satisfying the condition.");
     }
 
     public T firstOrDefault() {
         try {
             return first();
-        } catch (IllegalStateException e) {
-            // Catching no such element exception
+        } catch (NoSuchElementException e) {
+            // Catching no such element
         }
 
         return null;
@@ -83,14 +84,61 @@ public abstract class QueryBuilderBase<T> {
     public T firstOrDefault(Func<T, Boolean> predicate) {
         try {
             return first(predicate);
-        } catch (IllegalStateException e) {
-            // Catching no such element exception
+        } catch (NoSuchElementException e) {
+            // Catching no such element
         }
 
         return null;
     }
 
     public T single() {
-        
+        if (source.isEmpty()) {
+            throw new IllegalStateException("The collection is empty.");
+        }
+
+        if (source.size() > 1) {
+            throw new TooManyElementsException("There are more than one elements.");
+        }
+
+        return source.get(0);
+    }
+
+    public T single(Func<T, Boolean> predicate) {
+        var satisfyingElements = new ArrayList<T>();
+        for (var element : source) {
+            if (predicate.execute(element)) {
+                satisfyingElements.add(element);
+            }
+        }
+
+        if (satisfyingElements.isEmpty()) {
+            throw new NoSuchElementException("There are no elements satisfying the condition.");
+        }
+
+        if (satisfyingElements.size() > 1) {
+            throw new TooManyElementsException("There were more than one elements satisfying the condition.");
+        }
+
+        return satisfyingElements.get(0);
+    }
+
+    public T singleOrDefault() {
+        try {
+            return single();
+        } catch (NoSuchElementException e) {
+            // Catching no such element exception
+        }
+
+        return null;
+    }
+
+    public T singleOrDefault(Func<T, Boolean> predicate) {
+        try {
+            return single(predicate);
+        } catch (NoSuchElementException e) {
+            // Catching no such element exception
+        }
+
+        return null;
     }
 }
