@@ -5,11 +5,11 @@ import linq.Func;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class Order<T> {
-    private Func<T, ? extends Comparable> predicate;
-    private Direction direction;
+public abstract class OrderBase<T, TProperty> {
+    protected Func<T, TProperty> predicate;
+    protected Direction direction;
 
-    public Order(Func<T, ?extends Comparable> predicate, Direction direction) {
+    public OrderBase(Func<T, TProperty> predicate, Direction direction) {
         this.predicate = predicate;
         this.direction = direction;
     }
@@ -25,10 +25,10 @@ public class Order<T> {
         return orderedCollection;
     }
 
-    private int findIndex(ArrayList<T> sortedList, T element) {
+    private int findIndex(ArrayList<T> orderedCollection, T element) {
         int index;
-        for (index = 0; index < sortedList.size(); index++) {
-            var compareResult = predicate.execute(sortedList.get(index)).compareTo(predicate.execute(element));
+        for (index = 0; index < orderedCollection.size(); index++) {
+            int compareResult = compare(orderedCollection.get(index), element);
 
             if (compareResult > 0 && direction == Direction.ASCENDING) {
                 return index;
@@ -41,4 +41,6 @@ public class Order<T> {
 
         return index;
     }
+
+    protected abstract int compare(T orderedListElement, T element);
 }

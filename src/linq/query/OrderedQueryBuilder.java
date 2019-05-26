@@ -2,27 +2,40 @@ package linq.query;
 
 import linq.Func;
 import linq.orders.Direction;
-import linq.orders.Order;
+import linq.orders.OrderBase;
+import linq.orders.OrderByComparable;
+import linq.orders.OrderByComparator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 
 public class OrderedQueryBuilder<T> extends QueryBuilderBase<T> {
-    private ArrayList<Order<T>> orders;
+    private ArrayList<OrderBase<T, ?>> orders;
 
-    OrderedQueryBuilder(Collection<T> source, Order<T> firstOrder) {
+    OrderedQueryBuilder(Collection<T> source, OrderBase<T, ?> firstOrder) {
         super(source);
         orders = new ArrayList<>();
         orders.add(firstOrder);
     }
 
-    public OrderedQueryBuilder<T> thenBy(Func<T, ? extends Comparable> predicate) {
-        orders.add(0, new Order<>(predicate, Direction.ASCENDING));
+    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<T> thenBy(Func<T, TProperty> predicate) {
+        orders.add(0, new OrderByComparable<>(predicate, Direction.ASCENDING));
         return this;
     }
 
-    public OrderedQueryBuilder<T> thenByDescending(Func<T, ? extends Comparable> predicate) {
-        orders.add(0, new Order<>(predicate, Direction.DESCENDING));
+    public <TProperty> OrderedQueryBuilder<T> thenBy(Func<T, TProperty> predicate, Comparator<TProperty> comparator) {
+        orders.add(0, new OrderByComparator<>(predicate, Direction.ASCENDING, comparator));
+        return this;
+    }
+
+    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<T> thenByDescending(Func<T, TProperty> predicate) {
+        orders.add(0, new OrderByComparable<>(predicate, Direction.DESCENDING));
+        return this;
+    }
+
+    public <TProperty> OrderedQueryBuilder<T> thenByDescending(Func<T, TProperty> predicate, Comparator<TProperty> comparator) {
+        orders.add(0, new OrderByComparator<>(predicate, Direction.DESCENDING, comparator));
         return this;
     }
 

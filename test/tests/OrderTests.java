@@ -31,6 +31,11 @@ public class OrderTests {
     }
 
     @Test
+    public void testOrderByAgeWithComparator() {
+
+    }
+
+    @Test
     public void testOrderByMultiple() {
         var orderedCollection = Linq.from(testCollection)
                 .where(p -> p.getAge() > 30)
