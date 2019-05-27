@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class OrderTests {
     private ArrayList<Person> testCollection;
@@ -32,7 +33,37 @@ public class OrderTests {
 
     @Test
     public void testOrderByAgeWithComparator() {
+        var orderedCollection = Linq.from(testCollection)
+                .orderBy(p -> p.getAge(), (age1, age2) -> age1.compareTo(age2))
+                .select(p -> p.getName());
 
+        var comparedCollection = DataProvider.getPeopleOrderedByAge();
+        for (int i = 0; i < orderedCollection.size(); i++) {
+            Assert.assertEquals(comparedCollection.get(i).getName(), orderedCollection.get(i));
+        }
+    }
+
+    @Test
+    public void testOrderByCustomDate() {
+        var orderedCollection = Linq.from(testCollection)
+                .orderBy(p -> p.getBirthDate(), (date1, date2) -> {
+                    if (date1.getYear() == date2.getYear()) {
+                        if (date1.getMonth() == date2.getMonth()) {
+                            return date1.getDay() - date2.getDay();
+                        } else {
+                            return date1.getMonth() - date2.getMonth();
+                        }
+                    }
+
+                    return date1.getYear() - date2.getYear();
+                })
+                .select(p -> p.getName());
+
+        var comparedCollection = DataProvider.getPeopleOrderedByAge();
+        Collections.reverse(comparedCollection);
+        for (int i = 0; i < orderedCollection.size(); i++) {
+            Assert.assertEquals(comparedCollection.get(i).getName(), orderedCollection.get(i));
+        }
     }
 
     @Test

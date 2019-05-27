@@ -1,15 +1,15 @@
 package linq.orders;
 
-import linq.Func;
+import linq.Func1;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class OrderBase<T, TProperty> {
-    protected Func<T, TProperty> predicate;
+    protected Func1<T, TProperty> predicate;
     protected Direction direction;
 
-    public OrderBase(Func<T, TProperty> predicate, Direction direction) {
+    public OrderBase(Func1<T, TProperty> predicate, Direction direction) {
         this.predicate = predicate;
         this.direction = direction;
     }

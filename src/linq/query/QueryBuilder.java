@@ -1,6 +1,6 @@
 package linq.query;
 
-import linq.Func;
+import linq.Func1;
 import linq.orders.Direction;
 import linq.orders.OrderByComparable;
 import linq.orders.OrderByComparator;
@@ -14,23 +14,23 @@ public class QueryBuilder<T> extends QueryBuilderBase<T> {
         super(sourceCollection);
     }
 
-    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<T> orderBy(Func<T, TProperty> predicate) {
+    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<T> orderBy(Func1<T, TProperty> predicate) {
         return new OrderedQueryBuilder<>(source, new OrderByComparable<>(predicate, Direction.ASCENDING));
     }
 
-    public <TProperty> OrderedQueryBuilder<T> orderBy(Func<T, TProperty> predicate, Comparator<TProperty> comparator) {
+    public <TProperty> OrderedQueryBuilder<T> orderBy(Func1<T, TProperty> predicate, Comparator<TProperty> comparator) {
         return new OrderedQueryBuilder<>(source, new OrderByComparator<>(predicate, Direction.ASCENDING, comparator));
     }
 
-    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<T> orderByDescending(Func<T, TProperty> predicate) {
+    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<T> orderByDescending(Func1<T, TProperty> predicate) {
         return new OrderedQueryBuilder<>(source, new OrderByComparable<>(predicate, Direction.DESCENDING));
     }
 
-    public <TProperty> OrderedQueryBuilder<T> orderByDescending(Func<T, TProperty> predicate, Comparator<TProperty> comparator) {
+    public <TProperty> OrderedQueryBuilder<T> orderByDescending(Func1<T, TProperty> predicate, Comparator<TProperty> comparator) {
         return new OrderedQueryBuilder<>(source, new OrderByComparator<>(predicate, Direction.DESCENDING, comparator));
     }
 
-    public QueryBuilder<T> where(Func<T, Boolean> predicate) {
+    public QueryBuilder<T> where(Func1<T, Boolean> predicate) {
         var filterResult = new ArrayList<T>();
 
         for (var element : source) {

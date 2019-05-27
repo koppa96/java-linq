@@ -1,6 +1,6 @@
 package linq.query;
 
-import linq.Func;
+import linq.Func1;
 import linq.orders.Direction;
 import linq.orders.OrderBase;
 import linq.orders.OrderByComparable;
@@ -19,22 +19,22 @@ public class OrderedQueryBuilder<T> extends QueryBuilderBase<T> {
         orders.add(firstOrder);
     }
 
-    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<T> thenBy(Func<T, TProperty> predicate) {
+    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<T> thenBy(Func1<T, TProperty> predicate) {
         orders.add(0, new OrderByComparable<>(predicate, Direction.ASCENDING));
         return this;
     }
 
-    public <TProperty> OrderedQueryBuilder<T> thenBy(Func<T, TProperty> predicate, Comparator<TProperty> comparator) {
+    public <TProperty> OrderedQueryBuilder<T> thenBy(Func1<T, TProperty> predicate, Comparator<TProperty> comparator) {
         orders.add(0, new OrderByComparator<>(predicate, Direction.ASCENDING, comparator));
         return this;
     }
 
-    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<T> thenByDescending(Func<T, TProperty> predicate) {
+    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<T> thenByDescending(Func1<T, TProperty> predicate) {
         orders.add(0, new OrderByComparable<>(predicate, Direction.DESCENDING));
         return this;
     }
 
-    public <TProperty> OrderedQueryBuilder<T> thenByDescending(Func<T, TProperty> predicate, Comparator<TProperty> comparator) {
+    public <TProperty> OrderedQueryBuilder<T> thenByDescending(Func1<T, TProperty> predicate, Comparator<TProperty> comparator) {
         orders.add(0, new OrderByComparator<>(predicate, Direction.DESCENDING, comparator));
         return this;
     }
@@ -45,7 +45,7 @@ public class OrderedQueryBuilder<T> extends QueryBuilderBase<T> {
         }
     }
 
-    public <TTarget> ArrayList<TTarget> select(Func<T, TTarget> converter) {
+    public <TTarget> ArrayList<TTarget> select(Func1<T, TTarget> converter) {
         orderElements();
         return super.select(converter);
     }

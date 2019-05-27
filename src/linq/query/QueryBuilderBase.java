@@ -1,10 +1,12 @@
 package linq.query;
 
-import linq.Func;
+import linq.Func1;
+import linq.Func2;
 import linq.exceptions.TooManyElementsException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.NoSuchElementException;
 
 
@@ -19,7 +21,7 @@ public abstract class QueryBuilderBase<T> {
         return source;
     }
 
-    public <TTarget> ArrayList<TTarget> select(Func<T, TTarget> converter) {
+    public <TTarget> ArrayList<TTarget> select(Func1<T, TTarget> converter) {
         var convertResult = new ArrayList<TTarget>();
 
         for (var element : source) {
@@ -29,7 +31,7 @@ public abstract class QueryBuilderBase<T> {
         return convertResult;
     }
 
-    public boolean any(Func<T, Boolean> predicate) {
+    public boolean any(Func1<T, Boolean> predicate) {
         for (var element : source) {
             if (predicate.execute(element)) {
                 return true;
@@ -39,7 +41,7 @@ public abstract class QueryBuilderBase<T> {
         return false;
     }
 
-    public boolean all(Func<T, Boolean> predicate) {
+    public boolean all(Func1<T, Boolean> predicate) {
         for (var element : source) {
             if (!predicate.execute(element)) {
                 return false;
@@ -49,7 +51,7 @@ public abstract class QueryBuilderBase<T> {
         return true;
     }
 
-    public boolean none(Func<T, Boolean> predicate) {
+    public boolean none(Func1<T, Boolean> predicate) {
         return !any(predicate);
     }
 
@@ -61,7 +63,7 @@ public abstract class QueryBuilderBase<T> {
         return source.get(0);
     }
 
-    public T first(Func<T, Boolean> predicate) {
+    public T first(Func1<T, Boolean> predicate) {
         for (var element : source) {
             if (predicate.execute(element)) {
                 return element;
@@ -81,7 +83,7 @@ public abstract class QueryBuilderBase<T> {
         return null;
     }
 
-    public T firstOrDefault(Func<T, Boolean> predicate) {
+    public T firstOrDefault(Func1<T, Boolean> predicate) {
         try {
             return first(predicate);
         } catch (NoSuchElementException e) {
@@ -103,7 +105,7 @@ public abstract class QueryBuilderBase<T> {
         return source.get(0);
     }
 
-    public T single(Func<T, Boolean> predicate) {
+    public T single(Func1<T, Boolean> predicate) {
         var satisfyingElements = new ArrayList<T>();
         for (var element : source) {
             if (predicate.execute(element)) {
@@ -132,7 +134,7 @@ public abstract class QueryBuilderBase<T> {
         return null;
     }
 
-    public T singleOrDefault(Func<T, Boolean> predicate) {
+    public T singleOrDefault(Func1<T, Boolean> predicate) {
         try {
             return single(predicate);
         } catch (NoSuchElementException e) {
@@ -140,5 +142,44 @@ public abstract class QueryBuilderBase<T> {
         }
 
         return null;
+    }
+
+    public T min(Comparator<T> comparator) {
+        return min(e -> e, comparator);
+    }
+
+    public <TProperty extends Comparable<TProperty>> T min(Func1<T, TProperty> predicate) {
+        return findExtreme((min, current) -> predicate.execute(min).compareTo(predicate.execute(current)) > 0);
+    }
+
+    public <TProperty> T min (Func1<T, TProperty> predicate, Comparator<TProperty> comparator) {
+        return findExtreme((min, current) -> comparator.compare(predicate.execute(min), predicate.execute(current)) > 0);
+    }
+
+    public T max(Comparator<T> comparator) {
+        return max(e -> e, comparator);
+    }
+
+    public <TProperty extends Comparable<TProperty>> T max(Func1<T, TProperty> predicate) {
+        return findExtreme((max, current) -> predicate.execute(max).compareTo(predicate.execute(current)) < 0);
+    }
+
+    public <TProperty> T max(Func1<T, TProperty> predicate, Comparator<TProperty> comparator) {
+        return findExtreme((max, current) -> comparator.compare(predicate.execute(max), predicate.execute(current)) < 0);
+    }
+
+    private T findExtreme(Func2<T, T, Boolean> comparator) {
+        if (source.isEmpty()) {
+            throw new IllegalStateException("The collection is empty.");
+        }
+
+        var extreme = source.get(0);
+        for (int i = 1; i < source.size(); i++) {
+            if (comparator.execute(extreme, source.get(i))) {
+                extreme = source.get(i);
+            }
+        }
+
+        return extreme;
     }
 }

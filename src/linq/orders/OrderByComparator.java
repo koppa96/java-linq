@@ -1,14 +1,13 @@
 package linq.orders;
 
-import linq.Func;
+import linq.Func1;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 
 public class OrderByComparator<T, TProperty> extends OrderBase<T, TProperty> {
     private Comparator<TProperty> comparator;
 
-    public OrderByComparator(Func<T, TProperty> predicate, Direction direction, Comparator<TProperty> comparator) {
+    public OrderByComparator(Func1<T, TProperty> predicate, Direction direction, Comparator<TProperty> comparator) {
         super(predicate, direction);
         this.comparator = comparator;
     }

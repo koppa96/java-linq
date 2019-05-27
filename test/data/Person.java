@@ -1,9 +1,12 @@
 package data;
 
+import java.util.Calendar;
+
 public class Person {
     private String name;
     private Gender gender;
     private int age;
+    private CustomDate birthDate;
 
     public Person() {
 
@@ -13,6 +16,9 @@ public class Person {
         this.name = name;
         this.gender = gender;
         this.age = age;
+
+        var calendar = Calendar.getInstance();
+        birthDate = new CustomDate(calendar.get(Calendar.YEAR) - age, 1, 1);
     }
 
     public String getName() {
@@ -37,5 +43,13 @@ public class Person {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public CustomDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(CustomDate birthDate) {
+        this.birthDate = birthDate;
     }
 }
