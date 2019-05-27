@@ -23,7 +23,7 @@ public class FilterTests {
     public void testWhere() {
         var filteredCollection = Linq.from(testCollection)
                 .where(p -> p.getAge() < 50)
-                .select();
+                .toList();
 
         Assert.assertEquals(DataProvider.LESSTHAN50YEARSOLDCOUNT, filteredCollection.size());
     }
@@ -32,7 +32,8 @@ public class FilterTests {
     public void testWhereByEnum() {
         var selectedCollection = Linq.from(testCollection)
                 .where(p -> p.getGender() == Gender.MALE)
-                .select(p -> p.getName());
+                .select(p -> p.getName())
+                .toList();
 
         Assert.assertEquals(DataProvider.MALECOUNT, selectedCollection.size());
     }

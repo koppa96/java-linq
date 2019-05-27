@@ -23,7 +23,8 @@ public class OrderTests {
     public void testOrderByAge() {
         var orderedCollection = Linq.from(testCollection)
                 .orderBy(p -> p.getAge())
-                .select(p -> p.getName());
+                .select(p -> p.getName())
+                .toList();
 
         var comparedCollection = DataProvider.getPeopleOrderedByAge();
         for (int i = 0; i < orderedCollection.size(); i++) {
@@ -35,7 +36,8 @@ public class OrderTests {
     public void testOrderByAgeWithComparator() {
         var orderedCollection = Linq.from(testCollection)
                 .orderBy(p -> p.getAge(), (age1, age2) -> age1.compareTo(age2))
-                .select(p -> p.getName());
+                .select(p -> p.getName())
+                .toList();
 
         var comparedCollection = DataProvider.getPeopleOrderedByAge();
         for (int i = 0; i < orderedCollection.size(); i++) {
@@ -57,7 +59,8 @@ public class OrderTests {
 
                     return date1.getYear() - date2.getYear();
                 })
-                .select(p -> p.getName());
+                .select(p -> p.getName())
+                .toList();
 
         var comparedCollection = DataProvider.getPeopleOrderedByAge();
         Collections.reverse(comparedCollection);
@@ -72,9 +75,17 @@ public class OrderTests {
                 .where(p -> p.getAge() > 30)
                 .orderBy(p -> p.getGender())
                 .thenBy(p -> p.getAge())
-                .select();
+                .toList();
 
         Assert.assertEquals(3, orderedCollection.size());
         Assert.assertEquals(Gender.FEMALE, orderedCollection.get(orderedCollection.size() - 1).getGender());
+    }
+
+    public void testOrderByDescending() {
+        var orderedCollection = Linq.from(testCollection)
+                .orderByDescending(p -> p.getName())
+                .toList();
+
+        Assert.assertEquals("Tamás", orderedCollection.get(0).getName());
     }
 }

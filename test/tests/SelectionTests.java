@@ -21,7 +21,7 @@ public class SelectionTests {
     @Test
     public void testSelect() {
         var selectedCollection = Linq.from(testCollection)
-                .select();
+                .toList();
 
         Assert.assertEquals(testCollection.size(), selectedCollection.size());
         Assert.assertEquals(DataProvider.FIRSTNAME, selectedCollection.get(0).getName());
@@ -30,7 +30,8 @@ public class SelectionTests {
     @Test
     public void testSelectWithPredicate() {
         var selectedCollection = Linq.from(testCollection)
-                .select(p -> p.getName());
+                .select(p -> p.getName())
+                .toList();
 
         Assert.assertEquals(testCollection.size(), selectedCollection.size());
         for (int i = 0; i < selectedCollection.size(); i++) {

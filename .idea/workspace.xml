@@ -2,22 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2bd946a4-3376-4a62-b280-30c357dd7b68" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/linq/Func2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/linq/query/ComparableOrderedQueryBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/linq/query/ComparableQueryBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/linq/query/ComparableQueryBuilderBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/data/CustomDate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/tests/MinMaxTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/linq/Func.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/linq/Func1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/linq/Linq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/linq/Linq.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/linq/orders/OrderBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/linq/orders/OrderBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/linq/orders/OrderByComparable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/linq/orders/OrderByComparable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/linq/orders/OrderByComparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/linq/orders/OrderByComparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/linq/query/ComparableOrderedQueryBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/linq/query/ComparableQueryBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/linq/query/ComparableQueryBuilderBase.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/linq/query/OrderedQueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/linq/query/OrderedQueryBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/linq/query/QueryBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/linq/query/QueryBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/linq/query/QueryBuilderBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/linq/query/QueryBuilderBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/data/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/tests/FilterTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/tests/FilterTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/tests/OrderTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/tests/OrderTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/tests/SelectionTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/tests/SelectionTests.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,7 +27,7 @@
     <SUITE FILE_PATH="coverage/Linq$All_in_Linq.ic" NAME="All in Linq Coverage Results" MODIFIED="1558958296181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="334" />
+    <option name="myElementSize" value="341" />
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="testRunner" value="GRADLE" />
@@ -39,11 +35,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/linq/query/QueryBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+            <state relative-caret-position="39">
+              <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -51,24 +47,61 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/linq/Linq.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/data/Person.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="4" column="31" lean-forward="true" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
+            <state relative-caret-position="286">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
               <folding>
-                <element signature="e#206#207#0" expanded="true" />
-                <element signature="e#249#250#0" expanded="true" />
+                <element signature="e#899#900#0" expanded="true" />
+                <element signature="e#931#932#0" expanded="true" />
+                <element signature="e#985#986#0" expanded="true" />
+                <element signature="e#1027#1028#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.base/java/lang/Class.java">
+        <entry file="file://$PROJECT_DIR$/test/data/Gender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="178" column="12" selection-start-line="178" selection-start-column="12" selection-end-line="178" selection-end-column="12" />
+            <state relative-caret-position="44">
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/data/DataProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="572">
+              <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/tests/FilterTests.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="436">
+              <caret line="24" column="44" lean-forward="true" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/tests/QueryBuilderBaseTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="395">
+              <caret line="69" column="5" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1444#1445#0" expanded="true" />
+                <element signature="e#1508#1509#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -76,8 +109,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/tests/OrderTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="502">
-              <caret line="65" column="9" lean-forward="true" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
+            <state relative-caret-position="501">
+              <caret line="80" column="40" lean-forward="true" selection-start-line="80" selection-start-column="40" selection-end-line="80" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -86,34 +119,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/linq/query/ComparableQueryBuilder.java">
+        <entry file="file://$PROJECT_DIR$/src/linq/query/OrderedQueryBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+            <state relative-caret-position="1029">
+              <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#182#183#0" expanded="true" />
-                <element signature="e#221#222#0" expanded="true" />
-                <element signature="e#320#321#0" expanded="true" />
-                <element signature="e#347#348#0" expanded="true" />
-                <element signature="e#390#391#0" expanded="true" />
-                <element signature="e#412#413#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/linq/query/ComparableOrderedQueryBuilder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="139" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#196#197#0" expanded="true" />
-                <element signature="e#223#224#0" expanded="true" />
-                <element signature="e#259#260#0" expanded="true" />
-                <element signature="e#286#287#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -122,42 +133,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/linq/query/QueryBuilderBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1301">
-              <caret line="181" lean-forward="true" selection-start-line="181" selection-end-line="181" />
+            <state relative-caret-position="190">
+              <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3627#3628#0" expanded="true" />
-                <element signature="e#3651#3652#0" expanded="true" />
-                <element signature="e#4170#4171#0" expanded="true" />
-                <element signature="e#4197#4198#0" expanded="true" />
+                <element signature="e#352#353#0" expanded="true" />
+                <element signature="e#381#382#0" expanded="true" />
+                <element signature="e#414#415#0" expanded="true" />
+                <element signature="e#451#452#0" expanded="true" />
+                <element signature="e#478#479#0" expanded="true" />
+                <element signature="e#523#524#0" expanded="true" />
+                <element signature="e#4661#4662#0" expanded="true" />
+                <element signature="e#5226#5227#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/linq/Func1.java">
+        <entry file="file://$PROJECT_DIR$/test/tests/SelectionTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="66">
-              <caret line="3" column="3" lean-forward="true" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/linq/query/ComparableQueryBuilderBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/linq/Func2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="132">
-              <caret line="6" column="48" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
+            <state relative-caret-position="263">
+              <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -190,29 +190,31 @@
         <option value="$PROJECT_DIR$/src/main/Main.java" />
         <option value="$PROJECT_DIR$/test/SelectionTests.java" />
         <option value="$PROJECT_DIR$/test/FilterTests.java" />
-        <option value="$PROJECT_DIR$/test/tests/FilterTests.java" />
         <option value="$PROJECT_DIR$/test/data/Gender.java" />
         <option value="$PROJECT_DIR$/test/data/DataProvider.java" />
-        <option value="$PROJECT_DIR$/test/tests/QueryBuilderBaseTest.java" />
         <option value="$PROJECT_DIR$/src/linq/orders/Order.java" />
-        <option value="$PROJECT_DIR$/src/linq/query/OrderedQueryBuilder.java" />
         <option value="$PROJECT_DIR$/src/linq/orders/OrderByComparable.java" />
         <option value="$PROJECT_DIR$/src/linq/orders/OrderByComparator.java" />
         <option value="$PROJECT_DIR$/src/linq/orders/OrderBase.java" />
         <option value="$PROJECT_DIR$/test/data/AgeComparator.java" />
         <option value="$PROJECT_DIR$/test/data/CustomDate.java" />
         <option value="$PROJECT_DIR$/test/data/Person.java" />
-        <option value="$PROJECT_DIR$/src/linq/query/QueryBuilder.java" />
-        <option value="$PROJECT_DIR$/test/tests/OrderTests.java" />
         <option value="$PROJECT_DIR$/src/linq/query/ComparableQueryBuilderBase.java" />
         <option value="$PROJECT_DIR$/src/linq/Func.java" />
         <option value="$PROJECT_DIR$/src/linq/Func1Param.java" />
         <option value="$PROJECT_DIR$/src/linq/Func1.java" />
         <option value="$PROJECT_DIR$/src/linq/Func2.java" />
-        <option value="$PROJECT_DIR$/src/linq/query/ComparableOrderedQueryBuilder.java" />
+        <option value="$PROJECT_DIR$/test/tests/QueryBuilderBaseTest.java" />
         <option value="$PROJECT_DIR$/src/linq/query/ComparableQueryBuilder.java" />
-        <option value="$PROJECT_DIR$/src/linq/query/QueryBuilderBase.java" />
+        <option value="$PROJECT_DIR$/src/linq/query/ComparableOrderedQueryBuilder.java" />
+        <option value="$PROJECT_DIR$/src/linq/query/QueryBuilder.java" />
+        <option value="$PROJECT_DIR$/test/tests/MinMaxTests.java" />
         <option value="$PROJECT_DIR$/src/linq/Linq.java" />
+        <option value="$PROJECT_DIR$/test/tests/FilterTests.java" />
+        <option value="$PROJECT_DIR$/src/linq/query/QueryBuilderBase.java" />
+        <option value="$PROJECT_DIR$/test/tests/SelectionTests.java" />
+        <option value="$PROJECT_DIR$/src/linq/query/OrderedQueryBuilder.java" />
+        <option value="$PROJECT_DIR$/test/tests/OrderTests.java" />
       </list>
     </option>
   </component>
@@ -342,6 +344,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MinMaxTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Linq" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="tests" />
+      <option name="MAIN_CLASS_NAME" value="tests.MinMaxTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="QueryBuilderBaseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Linq" />
       <extension name="coverage">
@@ -371,10 +388,12 @@
       <item itemvalue="JUnit.SelectionTests" />
       <item itemvalue="JUnit.All in Linq" />
       <item itemvalue="JUnit.QueryBuilderBaseTest" />
+      <item itemvalue="JUnit.MinMaxTests" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in Linq" />
+        <item itemvalue="JUnit.MinMaxTests" />
         <item itemvalue="JUnit.QueryBuilderBaseTest" />
         <item itemvalue="JUnit.SelectionTests" />
         <item itemvalue="Application.Main" />
@@ -397,7 +416,7 @@
       <workItem from="1558899822869" duration="11000" />
       <workItem from="1558956564252" duration="6575000" />
       <workItem from="1558967166199" duration="55000" />
-      <workItem from="1558967644175" duration="7947000" />
+      <workItem from="1558967644175" duration="12851000" />
     </task>
     <task id="LOCAL-00001" summary="Implementing any, all, single, first">
       <created>1558810929070</created>
@@ -420,28 +439,17 @@
       <option name="project" value="LOCAL" />
       <updated>1558899387784</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Adding support for minimum and maximum finding">
+      <created>1558975748523</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1558975748523</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_Linq - 2019.05.25 at 21h 22m 53s.xml">
-      <configuration name="All in Linq" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="QueryBuilderBaseTest - 2019.05.25 at 21h 22m 58s.xml">
-      <configuration name="QueryBuilderBaseTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="QueryBuilderBaseTest - 2019.05.25 at 21h 24m 06s.xml">
-      <configuration name="QueryBuilderBaseTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="QueryBuilderBaseTest - 2019.05.25 at 21h 24m 38s.xml">
-      <configuration name="QueryBuilderBaseTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_Linq - 2019.05.25 at 21h 24m 58s.xml">
-      <configuration name="All in Linq" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_Linq - 2019.05.26 at 21h 06m 36s.xml">
-      <configuration name="All in Linq" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="All_in_Linq - 2019.05.26 at 21h 13m 54s.xml">
       <configuration name="All in Linq" configurationId="JUnit" />
     </history-entry>
@@ -454,9 +462,27 @@
     <history-entry file="All_in_Linq - 2019.05.27 at 13h 58m 31s.xml">
       <configuration name="All in Linq" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="MinMaxTests - 2019.05.27 at 19h 42m 31s.xml">
+      <configuration name="MinMaxTests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_Linq - 2019.05.27 at 19h 43m 18s.xml">
+      <configuration name="All in Linq" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_Linq - 2019.05.27 at 20h 01m 22s.xml">
+      <configuration name="All in Linq" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_Linq - 2019.05.27 at 20h 02m 39s.xml">
+      <configuration name="All in Linq" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_Linq - 2019.05.27 at 20h 03m 00s.xml">
+      <configuration name="All in Linq" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_Linq - 2019.05.27 at 20h 05m 19s.xml">
+      <configuration name="All in Linq" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35544000" />
+    <option name="totallyTimeSpent" value="40448000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -471,7 +497,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -502,7 +528,11 @@
     <MESSAGE value="Implementing any, all, single, first" />
     <MESSAGE value="Creating tests" />
     <MESSAGE value="Adding Comparator support for ordering" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding Comparator support for ordering" />
+    <MESSAGE value="Adding support for minimum and maximum finding" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding support for minimum and maximum finding" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Linq$All_in_Linq.ic" NAME="All in Linq Coverage Results" MODIFIED="1558980301974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/linq/exceptions/NoSuchElementException.java" />
@@ -536,33 +566,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/Person.java" />
     <entry file="file://$PROJECT_DIR$/src/main/Main.java" />
-    <entry file="file://$PROJECT_DIR$/test/tests/SelectionTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/tests/FilterTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/data/DataProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/linq/orders/Direction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
@@ -591,26 +594,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/linq/orders/OrderByComparator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="17" column="101" selection-start-line="17" selection-start-column="101" selection-end-line="17" selection-end-column="101" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linq/query/OrderedQueryBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/linq/orders/OrderByComparable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -621,14 +604,148 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/linq/Func2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="6" column="48" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linq/Func1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="3" column="3" lean-forward="true" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.base/java/lang/Class.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="178" column="12" selection-start-line="178" selection-start-column="12" selection-end-line="178" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linq/query/ComparableQueryBuilderBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linq/orders/OrderByComparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="5" lean-forward="true" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linq/query/ComparableOrderedQueryBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#196#197#0" expanded="true" />
+            <element signature="e#223#224#0" expanded="true" />
+            <element signature="e#259#260#0" expanded="true" />
+            <element signature="e#286#287#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linq/query/ComparableQueryBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="677">
+          <caret line="42" column="129" selection-start-line="42" selection-start-column="129" selection-end-line="42" selection-end-column="129" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#182#183#0" expanded="true" />
+            <element signature="e#221#222#0" expanded="true" />
+            <element signature="e#320#321#0" expanded="true" />
+            <element signature="e#347#348#0" expanded="true" />
+            <element signature="e#390#391#0" expanded="true" />
+            <element signature="e#412#413#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linq/Linq.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="5" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#206#207#0" expanded="true" />
+            <element signature="e#249#250#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/tests/MinMaxTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="19" column="50" lean-forward="true" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#236#237#0" expanded="true" />
+            <element signature="e#282#283#0" expanded="true" />
+            <element signature="e#418#419#0" expanded="true" />
+            <element signature="e#444#445#0" expanded="true" />
+            <element signature="e#778#779#0" expanded="true" />
+            <element signature="e#804#805#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/tests/FilterTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="24" column="44" lean-forward="true" selection-start-line="24" selection-start-column="44" selection-end-line="24" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/tests/SelectionTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/tests/QueryBuilderBaseTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="45" column="39" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
+        <state relative-caret-position="395">
+          <caret line="69" column="5" selection-start-line="69" selection-start-column="5" selection-end-line="69" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1444#1445#0" expanded="true" />
             <element signature="e#1508#1509#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/linq/query/QueryBuilderBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#352#353#0" expanded="true" />
+            <element signature="e#381#382#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
+            <element signature="e#451#452#0" expanded="true" />
+            <element signature="e#478#479#0" expanded="true" />
+            <element signature="e#523#524#0" expanded="true" />
+            <element signature="e#4661#4662#0" expanded="true" />
+            <element signature="e#5226#5227#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -648,110 +765,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/data/Gender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="44">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/linq/Func2.java">
+    <entry file="file://$PROJECT_DIR$/test/data/DataProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" column="48" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linq/Func1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="3" lean-forward="true" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linq/query/ComparableOrderedQueryBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="6" selection-start-line="6" selection-end-line="6" selection-end-column="139" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#196#197#0" expanded="true" />
-            <element signature="e#223#224#0" expanded="true" />
-            <element signature="e#259#260#0" expanded="true" />
-            <element signature="e#286#287#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="572">
+          <caret line="26" column="70" selection-start-line="26" selection-start-column="70" selection-end-line="26" selection-end-column="70" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/tests/OrderTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="65" column="9" lean-forward="true" selection-start-line="65" selection-start-column="9" selection-end-line="65" selection-end-column="9" />
+        <state relative-caret-position="501">
+          <caret line="80" column="40" lean-forward="true" selection-start-line="80" selection-start-column="40" selection-end-line="80" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-12.0.1/lib/src.zip!/java.base/java/lang/Class.java">
+    <entry file="file://$PROJECT_DIR$/src/linq/query/OrderedQueryBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="178" column="12" selection-start-line="178" selection-start-column="12" selection-end-line="178" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linq/query/ComparableQueryBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="20" column="13" lean-forward="true" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        <state relative-caret-position="1029">
+          <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#182#183#0" expanded="true" />
-            <element signature="e#221#222#0" expanded="true" />
-            <element signature="e#320#321#0" expanded="true" />
-            <element signature="e#347#348#0" expanded="true" />
-            <element signature="e#390#391#0" expanded="true" />
-            <element signature="e#412#413#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linq/query/ComparableQueryBuilderBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/linq/query/QueryBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        <state relative-caret-position="39">
+          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linq/query/QueryBuilderBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1301">
-          <caret line="181" lean-forward="true" selection-start-line="181" selection-end-line="181" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3627#3628#0" expanded="true" />
-            <element signature="e#3651#3652#0" expanded="true" />
-            <element signature="e#4170#4171#0" expanded="true" />
-            <element signature="e#4197#4198#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/linq/Linq.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="31" lean-forward="true" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
-          <folding>
-            <element signature="e#206#207#0" expanded="true" />
-            <element signature="e#249#250#0" expanded="true" />
           </folding>
         </state>
       </provider>
