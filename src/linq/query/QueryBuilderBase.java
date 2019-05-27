@@ -7,7 +7,7 @@ import linq.exceptions.TooManyElementsException;
 import java.util.*;
 
 
-public abstract class QueryBuilderBase<TSource> {
+public abstract class QueryBuilderBase<TSource> implements Collection<TSource> {
     ArrayList<TSource> source;
 
     QueryBuilderBase(Collection<TSource> source) {
@@ -22,8 +22,68 @@ public abstract class QueryBuilderBase<TSource> {
         return new HashSet<>(source);
     }
 
+    @Override
+    public int size() {
+        return source.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return source.isEmpty();
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return source.contains(o);
+    }
+
+    @Override
+    public Iterator<TSource> iterator() {
+        return source.iterator();
+    }
+
     public TSource[] toArray() {
         return (TSource[]) source.toArray();
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        return source.toArray(a);
+    }
+
+    @Override
+    public boolean add(TSource tSource) {
+        return source.add(tSource);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return source.remove(o);
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return source.containsAll(c);
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends TSource> c) {
+        return source.addAll(c);
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return source.removeAll(c);
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return source.retainAll(c);
+    }
+
+    @Override
+    public void clear() {
+        source.clear();
     }
 
     public <TKey, TElement> Map<TKey, TElement> toMap(Func1<TSource, TKey> keyGenerator, Func1<TSource, TElement> elementGenerator) {
@@ -41,6 +101,18 @@ public abstract class QueryBuilderBase<TSource> {
 
         for (var element : source) {
             convertResult.add(converter.execute(element));
+        }
+
+        return new QueryBuilder<>(convertResult);
+    }
+
+    public <TTarget> QueryBuilder<TTarget> selectDistinct(Func1<TSource, TTarget> converter) {
+        var convertResult = new ArrayList<TTarget>();
+
+        for (var element : source) {
+            if (!convertResult.contains(converter.execute(element))) {
+                convertResult.add(converter.execute(element));
+            }
         }
 
         return new QueryBuilder<>(convertResult);

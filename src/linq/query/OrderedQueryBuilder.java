@@ -43,9 +43,16 @@ public class OrderedQueryBuilder<TSource> extends QueryBuilderBase<TSource> {
         }
     }
 
+    @Override
     public <TTarget> QueryBuilder<TTarget> select(Func1<TSource, TTarget> converter) {
         orderElements();
         return super.select(converter);
+    }
+
+    @Override
+    public <TTarget> QueryBuilder<TTarget> selectDistinct(Func1<TSource, TTarget> converter) {
+        orderElements();
+        return super.selectDistinct(converter);
     }
 
     @Override
