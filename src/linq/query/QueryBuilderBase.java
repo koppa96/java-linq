@@ -5,16 +5,20 @@ import linq.Func2;
 import linq.exceptions.TooManyElementsException;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-
-public abstract class QueryBuilderBase<TSource> implements Collection<TSource> {
+/**
+ * Base class for query builders, can not be instantiated. Contains the common functionality of query builders.
+ * @param <TSource> The type of the elements of the source collection
+ */
+public abstract class QueryBuilderBase<TSource> {
     ArrayList<TSource> source;
 
     QueryBuilderBase(Collection<TSource> source) {
         this.source = new ArrayList<>(source);
     }
 
-    public ArrayList<TSource> toList() {
+    public List<TSource> toList() {
         return source;
     }
 
@@ -22,68 +26,8 @@ public abstract class QueryBuilderBase<TSource> implements Collection<TSource> {
         return new HashSet<>(source);
     }
 
-    @Override
-    public int size() {
-        return source.size();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return source.isEmpty();
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return source.contains(o);
-    }
-
-    @Override
-    public Iterator<TSource> iterator() {
-        return source.iterator();
-    }
-
     public TSource[] toArray() {
         return (TSource[]) source.toArray();
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-        return source.toArray(a);
-    }
-
-    @Override
-    public boolean add(TSource tSource) {
-        return source.add(tSource);
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return source.remove(o);
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return source.containsAll(c);
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends TSource> c) {
-        return source.addAll(c);
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return source.removeAll(c);
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return source.retainAll(c);
-    }
-
-    @Override
-    public void clear() {
-        source.clear();
     }
 
     public <TKey, TElement> Map<TKey, TElement> toMap(Func1<TSource, TKey> keyGenerator, Func1<TSource, TElement> elementGenerator) {
@@ -290,5 +234,107 @@ public abstract class QueryBuilderBase<TSource> implements Collection<TSource> {
         }
 
         return extreme;
+    }
+
+    public int count() {
+        return source.size();
+    }
+
+    public int count(Func1<TSource, Boolean> predicate) {
+        int count = 0;
+
+        for (var element : source) {
+            if (predicate.execute(element)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public <TProperty extends Number> double sum(Func1<TSource, TProperty> predicate) {
+        double sum = 0;
+
+        for (var element : source) {
+            sum += predicate.execute(element).doubleValue();
+        }
+
+        return sum;
+    }
+
+    public <TProperty extends Number> double average(Func1<TSource, TProperty> predicate) {
+        return sum(predicate) / count();
+    }
+
+    public double sum() {
+        double sum = 0;
+
+        for (var element : source) {
+            if (!(element instanceof Number)) {
+                throw new IllegalStateException("The collection must contain numbers to be summed.");
+            }
+
+            sum += ((Number) element).doubleValue();
+        }
+
+        return sum;
+    }
+
+    public double average() {
+        return sum() / count();
+    }
+
+    private void validateAmount(int amount) {
+        if (amount < 0 || amount > count()) {
+            throw new IllegalArgumentException("The amount must be a natural number that is not more than the size of the collection.");
+        }
+    }
+
+    public QueryBuilder<TSource> skip(int amount) {
+        validateAmount(amount);
+        return new QueryBuilder<>(takeElements(amount, source.size()));
+    }
+
+    public QueryBuilder<TSource> skipLast(int amount) {
+        validateAmount(amount);
+        return new QueryBuilder<>(takeElements(0, source.size() - amount));
+    }
+
+    public QueryBuilder<TSource> take(int amount) {
+        validateAmount(amount);
+        return new QueryBuilder<>(takeElements(0, amount));
+    }
+
+    public QueryBuilder<TSource> takeLast(int amount) {
+        validateAmount(amount);
+        return new QueryBuilder<>(takeElements(source.size() - amount, source.size()));
+    }
+
+    private ArrayList<TSource> takeElements(int from, int to) {
+        var elements = new ArrayList<TSource>();
+        for (int i = from; i < to; i++) {
+            elements.add(source.get(i));
+        }
+
+        return elements;
+    }
+
+    public <TResult, TCollection> QueryBuilder<TResult> selectMany(Collection<TCollection> collection, Func2<TSource, TCollection, TResult> converter) {
+        var elements = new ArrayList<TResult>();
+        for (var element : source) {
+            for (var collectionElement : collection) {
+                elements.add(converter.execute(element, collectionElement));
+            }
+        }
+
+        return new QueryBuilder<>(elements);
+    }
+
+    public <TCollection> JoinBuilder<TSource, TCollection> join(Collection<TCollection> collection) {
+        return new JoinBuilder<>(toList(), collection);
+    }
+
+    public <TCollection> JoinBuilder<TSource, TCollection> join(QueryBuilderBase<TCollection> queryBuilder) {
+        return new JoinBuilder<>(toList(), queryBuilder.toList());
     }
 }

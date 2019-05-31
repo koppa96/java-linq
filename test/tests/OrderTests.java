@@ -81,6 +81,7 @@ public class OrderTests {
         Assert.assertEquals(Gender.FEMALE, orderedCollection.get(orderedCollection.size() - 1).getGender());
     }
 
+    @Test
     public void testOrderByDescending() {
         var orderedCollection = Linq.from(testCollection)
                 .orderByDescending(p -> p.getName())

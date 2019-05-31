@@ -1,6 +1,7 @@
 package linq.query;
 
 import linq.Func1;
+import linq.Func2;
 import linq.orders.Direction;
 import linq.orders.OrderBase;
 import linq.orders.OrderByComparable;
@@ -8,6 +9,10 @@ import linq.orders.OrderByComparator;
 
 import java.util.*;
 
+/**
+ * Represents a query that will be ordered on actions that convert it from this type (e.g. toList)
+ * @param <TSource> The type of the elements of the source collection
+ */
 public class OrderedQueryBuilder<TSource> extends QueryBuilderBase<TSource> {
     private ArrayList<OrderBase<TSource, ?>> orders;
 
@@ -56,7 +61,7 @@ public class OrderedQueryBuilder<TSource> extends QueryBuilderBase<TSource> {
     }
 
     @Override
-    public ArrayList<TSource> toList() {
+    public List<TSource> toList() {
         orderElements();
         return super.toList();
     }
@@ -77,5 +82,35 @@ public class OrderedQueryBuilder<TSource> extends QueryBuilderBase<TSource> {
     public TSource[] toArray() {
         orderElements();
         return super.toArray();
+    }
+
+    @Override
+    public QueryBuilder<TSource> skip(int amount) {
+        orderElements();
+        return super.skip(amount);
+    }
+
+    @Override
+    public QueryBuilder<TSource> skipLast(int amount) {
+        orderElements();
+        return super.skipLast(amount);
+    }
+
+    @Override
+    public QueryBuilder<TSource> take(int amount) {
+        orderElements();
+        return super.take(amount);
+    }
+
+    @Override
+    public QueryBuilder<TSource> takeLast(int amount) {
+        orderElements();
+        return super.takeLast(amount);
+    }
+
+    @Override
+    public <TResult, TCollection> QueryBuilder<TResult> selectMany(Collection<TCollection> collection, Func2<TSource, TCollection, TResult> converter) {
+        orderElements();
+        return super.selectMany(collection, converter);
     }
 }
