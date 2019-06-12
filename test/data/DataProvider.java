@@ -28,4 +28,24 @@ public class DataProvider {
 
         return testCollection;
     }
+
+    public static ArrayList<Car> getCars() {
+        var testCollection = new ArrayList<Car>();
+
+        testCollection.add(new Car("SAndor", "SQL-123"));
+        testCollection.add(new Car("Tamás", "FOS-999"));
+        testCollection.add(new Car("Tamás", "PRO-000"));
+
+        return testCollection;
+    }
+
+    public static ArrayList<OwnerData> joinedCollection() {
+        var joinedCollection = new ArrayList<OwnerData>();
+
+        joinedCollection.add(new OwnerData("SAndor", 48, Gender.MALE, "SQL-123"));
+        joinedCollection.add(new OwnerData("Tamás", 22, Gender.MALE, "FOS-999"));
+        joinedCollection.add(new OwnerData("Tamás", 22, Gender.MALE, "PRO-000"));
+
+        return joinedCollection;
+    }
 }
