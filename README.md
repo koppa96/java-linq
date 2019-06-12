@@ -11,13 +11,14 @@ This is a library for executing queries on Collections in java in a declarative 
 Let's assume we have a collection with the following items that we want to query:
 ```java
 public class Person {
-  public String name;
-  public int age;
+    public String name;
+    public int age;
 }
 
 public class Car {
-  public String ownerName;
-  public String licensePlate;
+    public String ownerName;
+    public String licensePlate;
+    public int power;
 }
 ```
 ### Creating a query
@@ -40,15 +41,36 @@ query.orderBy(p -> p.age);
 ```
 Note that ordering only takes place when skip/take/select/toList/toMap/etc. is called. orderBy and thenBy only queues the orderings. For that reason ordering is encouraged to be at the end of your statement.
 
+### Projection
+You can also project elements into new elements with the select method. You can select specific fields, or you can select a subset of fields into a new object.
+```java
+public class CarWithoutOwner {
+    public String licensePlate;
+    public int power;
+}
+
+List<String> licensePlates = Linq.from(cars)
+    .select(c -> c.licensePlate)
+    .toList();
+
+List<CarWithoutOwner> carsWithoutOwners = Linq.from(cars)
+    .select(c -> {
+        var carWithoutOwner = new CarWithoutOwner();
+        
+        carWithoutOwner.licensePlate = c.licensePlate;
+        carWithoutOwner.power = c.power;
+    }).toList();
+```
+
 ### Chaining statements
 You can also chain the statements from the query creation to the end like this:
 ```java
 List<String> names = Linq.from(people)
-  .where(p -> p.age < 20)
-  .orderBy(p -> p.age)
-  .thenByDescending(p -> p.name)
-  .select(p -> p.name)
-  .toList();
+    .where(p -> p.age < 20)
+    .orderBy(p -> p.age)
+    .thenByDescending(p -> p.name)
+    .select(p -> p.name)
+    .toList();
 ```
 This will select those people's names who are younger than 20 years ordered by their age ascending, and within the same age groups ordered by their names descending, and puts the result in a list.
 
@@ -56,23 +78,23 @@ This will select those people's names who are younger than 20 years ordered by t
 If you have to join 2 collections by a join condition, there's also an opportunity for that. First you have to create a joined element (as there are sadly no anonymous classes in java for now):
 ```java
 public class PersonWithCar {
-  public String name;
-  public int age;
-  public String carLicensePlate;
+    public String name;
+    public int age;
+    public String carLicensePlate;
 }
 
 List<PersonWithCar> joinedCollection = Linq.from(people)
-  .join(cars)
-  .on((p, c) -> p.name.equals(c.ownerName))
-  .into((p, c) -> {
-    var personWithCar = new PersonWithCar();
+    .join(cars)
+    .on((p, c) -> p.name.equals(c.ownerName))
+    .into((p, c) -> {
+        var personWithCar = new PersonWithCar();
     
-    personWithCar.name = p.name;
-    personWithCar.age = p.age;
-    personWithCar.carLicensePlate = c.licensePlate;
+        personWithCar.name = p.name;
+        personWithCar.age = p.age;
+        personWithCar.carLicensePlate = c.licensePlate;
     
-    return personWithCar;
-  }).toList();
+        return personWithCar;
+    }).toList();
 ```
 This will join the collection of cars to the collection of people, by the name of the owner, into a PersonWithCar collection. Obviously this long lambda can be extracted as a method for nicer look.
 
@@ -89,13 +111,13 @@ The first statement will return true if all of the elements satisfy the conditio
 You can also specify how many elements you want in your result collection, or you can skip some.
 ```java
 List<Person> oldest5Person = Linq.from(people)
-  .orderByDescending(p -> p.age)
-  .take(5)
-  .toList();
+    .orderByDescending(p -> p.age)
+    .take(5)
+    .toList();
   
 List<Person> listWithoutFirst10Element = Linq.from(people)
-  .skip(10)
-  .toList();
+    .skip(10)
+    .toList();
 ```
 
 ### Single, First, Last, SingleOrDefault, FirstOrDefault, LastOrDefault
