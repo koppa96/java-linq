@@ -1,4 +1,4 @@
-package linq;
+package linq.lambda;
 
 /**
  * Encapsulates a method which has 2 parameters and a return value.
