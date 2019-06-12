@@ -59,6 +59,8 @@ List<CarWithoutOwner> carsWithoutOwners = Linq.from(cars)
         
         carWithoutOwner.licensePlate = c.licensePlate;
         carWithoutOwner.power = c.power;
+        
+        return carWithoutOwner;
     }).toList();
 ```
 
