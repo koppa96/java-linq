@@ -124,6 +124,49 @@ public abstract class QueryBuilderBase<TSource> {
         return null;
     }
 
+    public TSource last() {
+        if (source.isEmpty()) {
+            throw new NoSuchElementException("The collection is empty");
+        }
+
+        return source.get(source.size() - 1);
+    }
+
+    public TSource last(Func1<TSource, Boolean> predicate) {
+        var satisfyingElements = new ArrayList<TSource>();
+        for (var element : source) {
+            if (predicate.execute(element)) {
+                satisfyingElements.add(element);
+            }
+        }
+
+        if (satisfyingElements.size() == 0) {
+            throw new NoSuchElementException("There are no elements satisfying the condition");
+        }
+
+        return satisfyingElements.get(satisfyingElements.size() - 1);
+    }
+
+    public TSource lastOrDefault() {
+        try {
+            return last();
+        } catch (NoSuchElementException e) {
+            // Catching no such element
+        }
+
+        return null;
+    }
+
+    public TSource lastOrDefault(Func1<TSource, Boolean> predicate) {
+        try {
+            return last(predicate);
+        } catch (NoSuchElementException e) {
+            // Catching no such element
+        }
+
+        return null;
+    }
+
     public TSource single() {
         if (source.isEmpty()) {
             throw new IllegalStateException("The collection is empty.");
