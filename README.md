@@ -34,12 +34,22 @@ query.where(p -> p.age < 20);
 ```
 Note that the selectors work if the age field is private and you use the p.getAge() accessor instead of p.age directly.
 
+### Lambdas
+The library uses 3 kinds of lambda expressions. Func1, Func2 and Action.
+ - `Func1` is a method with one parameter that returns some value. For example Func<String, Boolean> accepts String and returns Boolean.
+ - `Func2` is a method with 2 parameters that returns some value.
+ - `Action` is a method with one parameter that is a void.
+ 
+When you are using the library, you have to use these lambdas for filtering, selecting and ordering. Like above, the where method needs a `Func1<TSource, Boolean>`, which means you have to insert a lambda expression, whose input parameter is an element of the collection, and the return value is a boolean.
+
 ### Ordering
 You can also order your collection by using orderBy, and a selector which selects the field by which you want to order.
 ```java
 query.orderBy(p -> p.age);
 ```
 Note that ordering only takes place when skip/take/select/toList/toMap/etc. is called. orderBy and thenBy only queues the orderings. For that reason ordering is encouraged to be at the end of your statement.
+
+Also worth to note that you can only do this with fields that implement the Comparable<T> interface. If you have a field by which you want to order, but is not implementing the Comparable<T> interface, you can write your own comparator, and pass it as a second parameter.
 
 ### Projection
 You can also project elements into new elements with the select method. You can select specific fields, or you can select a subset of fields into a new object.
