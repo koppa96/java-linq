@@ -12,13 +12,13 @@ import java.util.Comparator;
 public class OrderByComparator<TSource, TProperty> extends OrderBase<TSource, TProperty> {
     private Comparator<TProperty> comparator;
 
-    public OrderByComparator(Func1<TSource, TProperty> predicate, Direction direction, Comparator<TProperty> comparator) {
-        super(predicate, direction);
+    public OrderByComparator(Func1<TSource, TProperty> selector, Direction direction, Comparator<TProperty> comparator) {
+        super(selector, direction);
         this.comparator = comparator;
     }
 
     @Override
     protected int compare(TSource orderedListElement, TSource element) {
-        return comparator.compare(predicate.execute(orderedListElement), predicate.execute(element));
+        return comparator.compare(selector.execute(orderedListElement), selector.execute(element));
     }
 }

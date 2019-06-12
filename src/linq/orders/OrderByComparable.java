@@ -9,13 +9,13 @@ import linq.lambda.Func1;
  */
 public class OrderByComparable<TSource, TProperty extends Comparable<TProperty>> extends OrderBase<TSource, TProperty> {
 
-    public OrderByComparable(Func1<TSource, TProperty> predicate, Direction direction) {
-        super(predicate, direction);
+    public OrderByComparable(Func1<TSource, TProperty> selector, Direction direction) {
+        super(selector, direction);
     }
 
     @Override
     protected int compare(TSource orderedListElement, TSource element) {
-        return predicate.execute(orderedListElement).compareTo(predicate.execute(element));
+        return selector.execute(orderedListElement).compareTo(selector.execute(element));
     }
 
 }

@@ -61,7 +61,7 @@ public abstract class QueryBuilderBase<TSource> {
     }
 
     /**
-     * Projects the elements of the collection into an other type using the given predicate.
+     * Projects the elements of the collection into an other type using the given selector.
      * @param converter The method that converts an element
      * @param <TTarget> The desired type
      * @return A QueryBuilder containing the projected collection
@@ -85,7 +85,7 @@ public abstract class QueryBuilderBase<TSource> {
     }
 
     /**
-     * Projects the elements of the collection into an other type using the given predicate. Each element will only appear once in the target collection.
+     * Projects the elements of the collection into an other type using the given selector. Each element will only appear once in the target collection.
      * @param converter The method that converts an element
      * @param <TTarget> The desired type
      * @return A QueryBuilder containing the projected collection
@@ -112,12 +112,12 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Checks whether any element in the collection satisfies the given condition.
-     * @param predicate The condition to be checked
+     * @param condition The condition to be checked
      * @return Whether any elements satisfies the given condition
      */
-    public boolean any(Func1<TSource, Boolean> predicate) {
+    public boolean any(Func1<TSource, Boolean> condition) {
         for (var element : source) {
-            if (predicate.execute(element)) {
+            if (condition.execute(element)) {
                 return true;
             }
         }
@@ -127,12 +127,12 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Checks whether all of the elements in the collection satisfy the given condition.
-     * @param predicate The condition to be checked
+     * @param condition The condition to be checked
      * @return Whether all the elements satisfy the given condition
      */
-    public boolean all(Func1<TSource, Boolean> predicate) {
+    public boolean all(Func1<TSource, Boolean> condition) {
         for (var element : source) {
-            if (!predicate.execute(element)) {
+            if (!condition.execute(element)) {
                 return false;
             }
         }
@@ -142,11 +142,11 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Check if no elements satisfy the given condition.
-     * @param predicate The condition to be checked
+     * @param condition The condition to be checked
      * @return True if no elements satisfy the condition
      */
-    public boolean none(Func1<TSource, Boolean> predicate) {
-        return !any(predicate);
+    public boolean none(Func1<TSource, Boolean> condition) {
+        return !any(condition);
     }
 
     /**
@@ -163,12 +163,12 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Returns the first element of the collection that satisfies the given condition.
-     * @param predicate The condition to be checked
+     * @param condition The condition to be checked
      * @return The first element that satisfies the collection
      */
-    public TSource first(Func1<TSource, Boolean> predicate) {
+    public TSource first(Func1<TSource, Boolean> condition) {
         for (var element : source) {
-            if (predicate.execute(element)) {
+            if (condition.execute(element)) {
                 return element;
             }
         }
@@ -192,12 +192,12 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Returns the first element that satisfies the given condition or null if none satisfy the condition.
-     * @param predicate The condition to be checked
+     * @param condition The condition to be checked
      * @return The first element that satisfies the condition
      */
-    public TSource firstOrDefault(Func1<TSource, Boolean> predicate) {
+    public TSource firstOrDefault(Func1<TSource, Boolean> condition) {
         try {
-            return first(predicate);
+            return first(condition);
         } catch (NoSuchElementException e) {
             // Catching no such element
         }
@@ -219,13 +219,13 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Returns the last element of the collection that satisfies the given condition.
-     * @param predicate The condition to be checked
+     * @param condition The condition to be checked
      * @return The last element that satisfies the condition
      */
-    public TSource last(Func1<TSource, Boolean> predicate) {
+    public TSource last(Func1<TSource, Boolean> condition) {
         var satisfyingElements = new ArrayList<TSource>();
         for (var element : source) {
-            if (predicate.execute(element)) {
+            if (condition.execute(element)) {
                 satisfyingElements.add(element);
             }
         }
@@ -253,12 +253,12 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Returns the last element that satisfies the given condition or null if none satisfy it.
-     * @param predicate The condition to be checked
+     * @param condition The condition to be checked
      * @return The last element that satisfies the condition
      */
-    public TSource lastOrDefault(Func1<TSource, Boolean> predicate) {
+    public TSource lastOrDefault(Func1<TSource, Boolean> condition) {
         try {
-            return last(predicate);
+            return last(condition);
         } catch (NoSuchElementException e) {
             // Catching no such element
         }
@@ -284,13 +284,13 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Returns the only element that satisfies the given condition. Throws exception if not exactly 1 element matches the condition.
-     * @param predicate The condition to be checked
+     * @param condition The condition to be checked
      * @return The only element that satisfies the condition
      */
-    public TSource single(Func1<TSource, Boolean> predicate) {
+    public TSource single(Func1<TSource, Boolean> condition) {
         var satisfyingElements = new ArrayList<TSource>();
         for (var element : source) {
-            if (predicate.execute(element)) {
+            if (condition.execute(element)) {
                 satisfyingElements.add(element);
             }
         }
@@ -322,12 +322,12 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Returns the only element that satisfies the given condition or null if none satisfy. Throws exception if more than 1 element satisfies the condition.
-     * @param predicate The condition to be checked
+     * @param condition The condition to be checked
      * @return The only element that satisfies the condition
      */
-    public TSource singleOrDefault(Func1<TSource, Boolean> predicate) {
+    public TSource singleOrDefault(Func1<TSource, Boolean> condition) {
         try {
-            return single(predicate);
+            return single(condition);
         } catch (NoSuchElementException e) {
             // Catching no such element exception
         }
@@ -360,24 +360,24 @@ public abstract class QueryBuilderBase<TSource> {
     }
 
     /**
-     * Finds the element whose property selected by the predicate is the smallest. The predicate must select a property that implements the Comparable interface.
-     * @param predicate The selector that selects the property of the element
+     * Finds the element whose property selected by the selector is the smallest. The selector must select a property that implements the Comparable interface.
+     * @param selector The selector that selects the property of the element
      * @param <TProperty> The type of the selected property
      * @return The element with the smallest selected property
      */
-    public <TProperty extends Comparable<TProperty>> TSource min(Func1<TSource, TProperty> predicate) {
-        return findExtreme((min, current) -> predicate.execute(min).compareTo(predicate.execute(current)) > 0);
+    public <TProperty extends Comparable<TProperty>> TSource min(Func1<TSource, TProperty> selector) {
+        return findExtreme((min, current) -> selector.execute(min).compareTo(selector.execute(current)) > 0);
     }
 
     /**
-     * Finds the element whose property selected by the predicate is the smallest using the given comparator.
-     * @param predicate The selector that selects the property of the element
+     * Finds the element whose property selected by the selector is the smallest using the given comparator.
+     * @param selector The selector that selects the property of the element
      * @param comparator The comparator that compares the elements
      * @param <TProperty> The type of the selected property
      * @return The element with the smallest selected property
      */
-    public <TProperty> TSource min (Func1<TSource, TProperty> predicate, Comparator<TProperty> comparator) {
-        return findExtreme((min, current) -> comparator.compare(predicate.execute(min), predicate.execute(current)) > 0);
+    public <TProperty> TSource min (Func1<TSource, TProperty> selector, Comparator<TProperty> comparator) {
+        return findExtreme((min, current) -> comparator.compare(selector.execute(min), selector.execute(current)) > 0);
     }
 
     /**
@@ -406,23 +406,23 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Finds the element whose selected property is the largest. The selected property must implement the Comparable interface.
-     * @param predicate The selector that selects the property of the element
+     * @param selector The selector that selects the property of the element
      * @param <TProperty> The type of the selected property
      * @return The element with the largest selected property
      */
-    public <TProperty extends Comparable<TProperty>> TSource max(Func1<TSource, TProperty> predicate) {
-        return findExtreme((max, current) -> predicate.execute(max).compareTo(predicate.execute(current)) < 0);
+    public <TProperty extends Comparable<TProperty>> TSource max(Func1<TSource, TProperty> selector) {
+        return findExtreme((max, current) -> selector.execute(max).compareTo(selector.execute(current)) < 0);
     }
 
     /**
      * Finds the element whose selected property is the largest using the given comparator.
-     * @param predicate The selector that selects the property of the element
+     * @param selector The selector that selects the property of the element
      * @param comparator The comparator
      * @param <TProperty> The type of the selected property
      * @return The element with the largest selected property
      */
-    public <TProperty> TSource max(Func1<TSource, TProperty> predicate, Comparator<TProperty> comparator) {
-        return findExtreme((max, current) -> comparator.compare(predicate.execute(max), predicate.execute(current)) < 0);
+    public <TProperty> TSource max(Func1<TSource, TProperty> selector, Comparator<TProperty> comparator) {
+        return findExtreme((max, current) -> comparator.compare(selector.execute(max), selector.execute(current)) < 0);
     }
 
     private TSource findExtreme(Func2<TSource, TSource, Boolean> comparator) {
@@ -450,24 +450,24 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Returns the number of elements that satisfy the given condition.
-     * @param predicate The condition to be checked
+     * @param condition The condition to be checked
      * @return The number of elements
      */
-    public int count(Func1<TSource, Boolean> predicate) {
-        return when(predicate).thenCount();
+    public int count(Func1<TSource, Boolean> condition) {
+        return when(condition).thenCount();
     }
 
     /**
      * Sums the selected property of the elements if the selected property is a number type.
-     * @param predicate The selector that selects the property
+     * @param selector The selector that selects the property
      * @param <TProperty> The type of the selected property
      * @return The sum of the selected property as a double
      */
-    public <TProperty extends Number> double sum(Func1<TSource, TProperty> predicate) {
+    public <TProperty extends Number> double sum(Func1<TSource, TProperty> selector) {
         double sum = 0;
 
         for (var element : source) {
-            sum += predicate.execute(element).doubleValue();
+            sum += selector.execute(element).doubleValue();
         }
 
         return sum;
@@ -475,12 +475,12 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Averages the selected property of the elements if the selected property is a number type.
-     * @param predicate The selector that selects the property
+     * @param selector The selector that selects the property
      * @param <TProperty> The type of the selected property
      * @return The average of the selected property as a double
      */
-    public <TProperty extends Number> double average(Func1<TSource, TProperty> predicate) {
-        return sum(predicate) / count();
+    public <TProperty extends Number> double average(Func1<TSource, TProperty> selector) {
+        return sum(selector) / count();
     }
 
     /**
@@ -617,11 +617,11 @@ public abstract class QueryBuilderBase<TSource> {
 
     /**
      * Starts building a when that can be used to call methods on elements that satisfy the given condition.
-     * @param predicate The condition
+     * @param condition The condition
      * @return A WhenBuilder with the given condition
      */
-    public WhenBuilder<TSource> when(Func1<TSource, Boolean> predicate) {
-        return new WhenBuilder<>(source, predicate);
+    public WhenBuilder<TSource> when(Func1<TSource, Boolean> condition) {
+        return new WhenBuilder<>(source, condition);
     }
 
     protected void forEachBase(Action<TSource> action) {

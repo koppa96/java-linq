@@ -11,11 +11,11 @@ import java.util.Collection;
  * @param <TProperty> The type of the selected property of the element
  */
 public abstract class OrderBase<TSource, TProperty> {
-    protected Func1<TSource, TProperty> predicate;
+    protected Func1<TSource, TProperty> selector;
     protected Direction direction;
 
-    public OrderBase(Func1<TSource, TProperty> predicate, Direction direction) {
-        this.predicate = predicate;
+    public OrderBase(Func1<TSource, TProperty> selector, Direction direction) {
+        this.selector = selector;
         this.direction = direction;
     }
 

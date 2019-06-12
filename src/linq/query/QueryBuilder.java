@@ -21,53 +21,53 @@ public class QueryBuilder<TSource> extends QueryBuilderBase<TSource> {
 
     /**
      * Creates an OrderedQuery that orders the elements by the selected property ascending. The selected property must be Comparable.
-     * @param predicate The selector that selects the property
+     * @param selector The selector that selects the property
      * @param <TProperty> The type of the property
      * @return An OrderedQueryBuilder containing the collection and the queued ordering
      */
-    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<TSource> orderBy(Func1<TSource, TProperty> predicate) {
-        return new OrderedQueryBuilder<>(source, new OrderByComparable<>(predicate, Direction.ASCENDING));
+    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<TSource> orderBy(Func1<TSource, TProperty> selector) {
+        return new OrderedQueryBuilder<>(source, new OrderByComparable<>(selector, Direction.ASCENDING));
     }
 
     /**
      * Creates an OrderedQuery that orders the elements by the selected property ascending using the given comparator.
-     * @param predicate The selector that selects the property
+     * @param selector The selector that selects the property
      * @param comparator The comparator that compares the properties
      * @param <TProperty> The type of the property
      * @return An OrderedQueryBuilder containing the collection and the queued ordering
      */
-    public <TProperty> OrderedQueryBuilder<TSource> orderBy(Func1<TSource, TProperty> predicate, Comparator<TProperty> comparator) {
-        return new OrderedQueryBuilder<>(source, new OrderByComparator<>(predicate, Direction.ASCENDING, comparator));
+    public <TProperty> OrderedQueryBuilder<TSource> orderBy(Func1<TSource, TProperty> selector, Comparator<TProperty> comparator) {
+        return new OrderedQueryBuilder<>(source, new OrderByComparator<>(selector, Direction.ASCENDING, comparator));
     }
 
     /**
      * Creates an OrderedQuery that orders the elements by the selected property descending. The selected property must be Comparable.
-     * @param predicate The selector that selects the property
+     * @param selector The selector that selects the property
      * @param <TProperty> The type of the property
      * @return An OrderedQueryBuilder containing the collection and the queued ordering
      */
-    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<TSource> orderByDescending(Func1<TSource, TProperty> predicate) {
-        return new OrderedQueryBuilder<>(source, new OrderByComparable<>(predicate, Direction.DESCENDING));
+    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<TSource> orderByDescending(Func1<TSource, TProperty> selector) {
+        return new OrderedQueryBuilder<>(source, new OrderByComparable<>(selector, Direction.DESCENDING));
     }
 
     /**
      * Creates an OrderedQuery that orders the elements by the selected property descending using the given comparator.
-     * @param predicate The selector that selects the property
+     * @param selector The selector that selects the property
      * @param comparator The comparator that compares the properties
      * @param <TProperty> The type of the property
      * @return An OrderedQueryBuilder containing the collection and the queued ordering
      */
-    public <TProperty> OrderedQueryBuilder<TSource> orderByDescending(Func1<TSource, TProperty> predicate, Comparator<TProperty> comparator) {
-        return new OrderedQueryBuilder<>(source, new OrderByComparator<>(predicate, Direction.DESCENDING, comparator));
+    public <TProperty> OrderedQueryBuilder<TSource> orderByDescending(Func1<TSource, TProperty> selector, Comparator<TProperty> comparator) {
+        return new OrderedQueryBuilder<>(source, new OrderByComparator<>(selector, Direction.DESCENDING, comparator));
     }
 
     /**
      * Filters the collection leaving only the elements that are satisfying the given condition.
-     * @param predicate The condition to be checked
+     * @param condition The condition to be checked
      * @return A QueryBuilder containing the filtered collection
      */
-    public QueryBuilder<TSource> where(Func1<TSource, Boolean> predicate) {
-        return when(predicate).thenFilter();
+    public QueryBuilder<TSource> where(Func1<TSource, Boolean> condition) {
+        return when(condition).thenFilter();
     }
 
     /**

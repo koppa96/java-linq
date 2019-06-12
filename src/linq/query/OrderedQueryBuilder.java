@@ -25,47 +25,47 @@ public class OrderedQueryBuilder<TSource> extends QueryBuilderBase<TSource> {
 
     /**
      * Queues an ordering that orders the elements ascending by the selected property. The selected property must be Comparable.
-     * @param predicate The selector that selects the property
+     * @param selector The selector that selects the property
      * @param <TProperty> The type of the property
      * @return The OrderedQueryBuilder
      */
-    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<TSource> thenBy(Func1<TSource, TProperty> predicate) {
-        orders.add(0, new OrderByComparable<>(predicate, Direction.ASCENDING));
+    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<TSource> thenBy(Func1<TSource, TProperty> selector) {
+        orders.add(0, new OrderByComparable<>(selector, Direction.ASCENDING));
         return this;
     }
 
     /**
      * Queues an ordering that orders the elements ascending by the selected property using the given comparator.
-     * @param predicate The selector that selects the property
+     * @param selector The selector that selects the property
      * @param comparator The comparator that compares the properties
      * @param <TProperty> The type of the property
      * @return The OrderedQueryBuilder
      */
-    public <TProperty> OrderedQueryBuilder<TSource> thenBy(Func1<TSource, TProperty> predicate, Comparator<TProperty> comparator) {
-        orders.add(0, new OrderByComparator<>(predicate, Direction.ASCENDING, comparator));
+    public <TProperty> OrderedQueryBuilder<TSource> thenBy(Func1<TSource, TProperty> selector, Comparator<TProperty> comparator) {
+        orders.add(0, new OrderByComparator<>(selector, Direction.ASCENDING, comparator));
         return this;
     }
 
     /**
      * Queues an ordering that orders the elements descending by the selected property. The selected property must be Comparable.
-     * @param predicate The selector that selects the property
+     * @param selector The selector that selects the property
      * @param <TProperty> The type of the property
      * @return The OrderedQueryBuilder
      */
-    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<TSource> thenByDescending(Func1<TSource, TProperty> predicate) {
-        orders.add(0, new OrderByComparable<>(predicate, Direction.DESCENDING));
+    public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<TSource> thenByDescending(Func1<TSource, TProperty> selector) {
+        orders.add(0, new OrderByComparable<>(selector, Direction.DESCENDING));
         return this;
     }
 
     /**
      * Queues an ordering that orders the elements descending by the selected property using the given comparator.
-     * @param predicate The selector that selects the property
+     * @param selector The selector that selects the property
      * @param comparator The comparator that compares the properties
      * @param <TProperty> The type of the property
      * @return The OrderedQueryBuilder
      */
-    public <TProperty> OrderedQueryBuilder<TSource> thenByDescending(Func1<TSource, TProperty> predicate, Comparator<TProperty> comparator) {
-        orders.add(0, new OrderByComparator<>(predicate, Direction.DESCENDING, comparator));
+    public <TProperty> OrderedQueryBuilder<TSource> thenByDescending(Func1<TSource, TProperty> selector, Comparator<TProperty> comparator) {
+        orders.add(0, new OrderByComparator<>(selector, Direction.DESCENDING, comparator));
         return this;
     }
 

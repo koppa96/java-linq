@@ -12,11 +12,11 @@ import java.util.Collection;
  */
 public class WhenBuilder<TSource> {
     private ArrayList<TSource> source;
-    private Func1<TSource, Boolean> predicate;
+    private Func1<TSource, Boolean> condition;
 
-    WhenBuilder(Collection<TSource> source, Func1<TSource, Boolean> predicate) {
+    WhenBuilder(Collection<TSource> source, Func1<TSource, Boolean> condition) {
         this.source = new ArrayList<>(source);
-        this.predicate = predicate;
+        this.condition = condition;
     }
 
     /**
@@ -26,7 +26,7 @@ public class WhenBuilder<TSource> {
      */
     public QueryBuilder<TSource> then(Action<TSource> action) {
         for (var element : source) {
-            if (predicate.execute(element)) {
+            if (condition.execute(element)) {
                 action.execute(element);
             }
         }
@@ -41,7 +41,7 @@ public class WhenBuilder<TSource> {
     public QueryBuilder<TSource> thenFilter() {
         var elements = new ArrayList<TSource>();
         for (var element : source) {
-            if (predicate.execute(element)) {
+            if (condition.execute(element)) {
                 elements.add(element);
             }
         }
@@ -57,7 +57,7 @@ public class WhenBuilder<TSource> {
         var count = 0;
 
         for (var element : source) {
-            if (predicate.execute(element)) {
+            if (condition.execute(element)) {
                 count++;
             }
         }
