@@ -1,11 +1,11 @@
 package linq.query;
 
-import linq.Func1;
-import linq.Func2;
+import linq.lambda.Action;
+import linq.lambda.Func1;
+import linq.lambda.Func2;
 import linq.exceptions.TooManyElementsException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Base class for query builders, can not be instantiated. Contains the common functionality of query builders.
@@ -241,15 +241,7 @@ public abstract class QueryBuilderBase<TSource> {
     }
 
     public int count(Func1<TSource, Boolean> predicate) {
-        int count = 0;
-
-        for (var element : source) {
-            if (predicate.execute(element)) {
-                count++;
-            }
-        }
-
-        return count;
+        return when(predicate).thenCount();
     }
 
     public <TProperty extends Number> double sum(Func1<TSource, TProperty> predicate) {
@@ -336,5 +328,15 @@ public abstract class QueryBuilderBase<TSource> {
 
     public <TCollection> JoinBuilder<TSource, TCollection> join(QueryBuilderBase<TCollection> queryBuilder) {
         return new JoinBuilder<>(toList(), queryBuilder.toList());
+    }
+
+    public WhenBuilder<TSource> when(Func1<TSource, Boolean> predicate) {
+        return new WhenBuilder<>(source, predicate);
+    }
+
+    protected void forEachBase(Action<TSource> action) {
+        for (var element : source) {
+            action.execute(element);
+        }
     }
 }

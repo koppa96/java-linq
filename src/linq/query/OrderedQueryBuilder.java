@@ -1,7 +1,8 @@
 package linq.query;
 
-import linq.Func1;
-import linq.Func2;
+import linq.lambda.Action;
+import linq.lambda.Func1;
+import linq.lambda.Func2;
 import linq.orders.Direction;
 import linq.orders.OrderBase;
 import linq.orders.OrderByComparable;
@@ -112,5 +113,10 @@ public class OrderedQueryBuilder<TSource> extends QueryBuilderBase<TSource> {
     public <TResult, TCollection> QueryBuilder<TResult> selectMany(Collection<TCollection> collection, Func2<TSource, TCollection, TResult> converter) {
         orderElements();
         return super.selectMany(collection, converter);
+    }
+
+    public OrderedQueryBuilder<TSource> forEach(Action<TSource> action) {
+        forEachBase(action);
+        return this;
     }
 }

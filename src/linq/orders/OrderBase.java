@@ -1,6 +1,6 @@
 package linq.orders;
 
-import linq.Func1;
+import linq.lambda.Func1;
 
 import java.util.ArrayList;
 import java.util.Collection;

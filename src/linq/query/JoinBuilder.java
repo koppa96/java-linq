@@ -1,6 +1,6 @@
 package linq.query;
 
-import linq.Func2;
+import linq.lambda.Func2;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,6 +1,6 @@
 package linq.orders;
 
-import linq.Func1;
+import linq.lambda.Func1;
 
 public class OrderByComparable<T, TProperty extends Comparable<TProperty>> extends OrderBase<T, TProperty> {
 

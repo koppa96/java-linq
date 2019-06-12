@@ -1,7 +1,7 @@
 package linq.query;
 
-import linq.Func1;
-import linq.Func2;
+import linq.lambda.Action;
+import linq.lambda.Func1;
 import linq.orders.Direction;
 import linq.orders.OrderByComparable;
 import linq.orders.OrderByComparator;
@@ -36,16 +36,7 @@ public class QueryBuilder<TSource> extends QueryBuilderBase<TSource> {
     }
 
     public QueryBuilder<TSource> where(Func1<TSource, Boolean> predicate) {
-        var filterResult = new ArrayList<TSource>();
-
-        for (var element : source) {
-            if (predicate.execute(element)) {
-                filterResult.add(element);
-            }
-        }
-
-        source = filterResult;
-        return this;
+        return when(predicate).thenFilter();
     }
 
     public QueryBuilder<TSource> concat(Collection<TSource> collection) {
@@ -55,6 +46,11 @@ public class QueryBuilder<TSource> extends QueryBuilderBase<TSource> {
 
     public QueryBuilder<TSource> concat(QueryBuilderBase<TSource> queryBuilder) {
         source.addAll(queryBuilder.toList());
+        return this;
+    }
+
+    public QueryBuilder<TSource> forEach(Action<TSource> action) {
+        forEachBase(action);
         return this;
     }
 }
