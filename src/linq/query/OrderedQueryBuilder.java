@@ -23,21 +23,47 @@ public class OrderedQueryBuilder<TSource> extends QueryBuilderBase<TSource> {
         orders.add(firstOrder);
     }
 
+    /**
+     * Queues an ordering that orders the elements ascending by the selected property. The selected property must be Comparable.
+     * @param predicate The selector that selects the property
+     * @param <TProperty> The type of the property
+     * @return The OrderedQueryBuilder
+     */
     public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<TSource> thenBy(Func1<TSource, TProperty> predicate) {
         orders.add(0, new OrderByComparable<>(predicate, Direction.ASCENDING));
         return this;
     }
 
+    /**
+     * Queues an ordering that orders the elements ascending by the selected property using the given comparator.
+     * @param predicate The selector that selects the property
+     * @param comparator The comparator that compares the properties
+     * @param <TProperty> The type of the property
+     * @return The OrderedQueryBuilder
+     */
     public <TProperty> OrderedQueryBuilder<TSource> thenBy(Func1<TSource, TProperty> predicate, Comparator<TProperty> comparator) {
         orders.add(0, new OrderByComparator<>(predicate, Direction.ASCENDING, comparator));
         return this;
     }
 
+    /**
+     * Queues an ordering that orders the elements descending by the selected property. The selected property must be Comparable.
+     * @param predicate The selector that selects the property
+     * @param <TProperty> The type of the property
+     * @return The OrderedQueryBuilder
+     */
     public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<TSource> thenByDescending(Func1<TSource, TProperty> predicate) {
         orders.add(0, new OrderByComparable<>(predicate, Direction.DESCENDING));
         return this;
     }
 
+    /**
+     * Queues an ordering that orders the elements descending by the selected property using the given comparator.
+     * @param predicate The selector that selects the property
+     * @param comparator The comparator that compares the properties
+     * @param <TProperty> The type of the property
+     * @return The OrderedQueryBuilder
+     */
     public <TProperty> OrderedQueryBuilder<TSource> thenByDescending(Func1<TSource, TProperty> predicate, Comparator<TProperty> comparator) {
         orders.add(0, new OrderByComparator<>(predicate, Direction.DESCENDING, comparator));
         return this;
@@ -110,9 +136,15 @@ public class OrderedQueryBuilder<TSource> extends QueryBuilderBase<TSource> {
     }
 
     @Override
-    public <TResult, TCollection> QueryBuilder<TResult> selectMany(Collection<TCollection> collection, Func2<TSource, TCollection, TResult> converter) {
+    public <TResult> QueryBuilder<TResult> selectMany(Func1<TSource, Collection<TResult>> collectionSelector) {
         orderElements();
-        return super.selectMany(collection, converter);
+        return super.selectMany(collectionSelector);
+    }
+
+    @Override
+    public <TResult, TCollection> QueryBuilder<TResult> selectMany(Func1<TSource, Collection<TCollection>> collectionSelector, Func2<TSource, TCollection, TResult> converter) {
+        orderElements();
+        return super.selectMany(collectionSelector, converter);
     }
 
     public OrderedQueryBuilder<TSource> forEach(Action<TSource> action) {

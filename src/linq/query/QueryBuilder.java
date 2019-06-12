@@ -19,36 +19,82 @@ public class QueryBuilder<TSource> extends QueryBuilderBase<TSource> {
         super(sourceCollection);
     }
 
+    /**
+     * Creates an OrderedQuery that orders the elements by the selected property ascending. The selected property must be Comparable.
+     * @param predicate The selector that selects the property
+     * @param <TProperty> The type of the property
+     * @return An OrderedQueryBuilder containing the collection and the queued ordering
+     */
     public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<TSource> orderBy(Func1<TSource, TProperty> predicate) {
         return new OrderedQueryBuilder<>(source, new OrderByComparable<>(predicate, Direction.ASCENDING));
     }
 
+    /**
+     * Creates an OrderedQuery that orders the elements by the selected property ascending using the given comparator.
+     * @param predicate The selector that selects the property
+     * @param comparator The comparator that compares the properties
+     * @param <TProperty> The type of the property
+     * @return An OrderedQueryBuilder containing the collection and the queued ordering
+     */
     public <TProperty> OrderedQueryBuilder<TSource> orderBy(Func1<TSource, TProperty> predicate, Comparator<TProperty> comparator) {
         return new OrderedQueryBuilder<>(source, new OrderByComparator<>(predicate, Direction.ASCENDING, comparator));
     }
 
+    /**
+     * Creates an OrderedQuery that orders the elements by the selected property descending. The selected property must be Comparable.
+     * @param predicate The selector that selects the property
+     * @param <TProperty> The type of the property
+     * @return An OrderedQueryBuilder containing the collection and the queued ordering
+     */
     public <TProperty extends Comparable<TProperty>> OrderedQueryBuilder<TSource> orderByDescending(Func1<TSource, TProperty> predicate) {
         return new OrderedQueryBuilder<>(source, new OrderByComparable<>(predicate, Direction.DESCENDING));
     }
 
+    /**
+     * Creates an OrderedQuery that orders the elements by the selected property descending using the given comparator.
+     * @param predicate The selector that selects the property
+     * @param comparator The comparator that compares the properties
+     * @param <TProperty> The type of the property
+     * @return An OrderedQueryBuilder containing the collection and the queued ordering
+     */
     public <TProperty> OrderedQueryBuilder<TSource> orderByDescending(Func1<TSource, TProperty> predicate, Comparator<TProperty> comparator) {
         return new OrderedQueryBuilder<>(source, new OrderByComparator<>(predicate, Direction.DESCENDING, comparator));
     }
 
+    /**
+     * Filters the collection leaving only the elements that are satisfying the given condition.
+     * @param predicate The condition to be checked
+     * @return A QueryBuilder containing the filtered collection
+     */
     public QueryBuilder<TSource> where(Func1<TSource, Boolean> predicate) {
         return when(predicate).thenFilter();
     }
 
+    /**
+     * Appends a collection to the end of the underlying collection.
+     * @param collection The collection to be appended
+     * @return A QueryBuilder containing the concatenated collections
+     */
     public QueryBuilder<TSource> concat(Collection<TSource> collection) {
         source.addAll(collection);
         return this;
     }
 
+    /**
+     * Appends the content of a QueryBuilder to the end of the underlying collection.
+     * @param queryBuilder The QueryBuilder to be appended
+     * @return A QueryBuilder containing the concatenated collections
+     */
     public QueryBuilder<TSource> concat(QueryBuilderBase<TSource> queryBuilder) {
         source.addAll(queryBuilder.toList());
         return this;
     }
 
+    /**
+     * Calls the given action for each element of the underlying collection.
+     * @param action The action to be done to the elements
+     * @return The QueryBuilder
+     */
     public QueryBuilder<TSource> forEach(Action<TSource> action) {
         forEachBase(action);
         return this;
