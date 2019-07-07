@@ -1,5 +1,6 @@
 package linq.query;
 
+import linq.Enumerable;
 import linq.lambda.Action;
 import linq.lambda.Func1;
 import linq.lambda.Func2;
@@ -11,53 +12,10 @@ import java.util.*;
  * Base class for query builders, can not be instantiated. Contains the common functionality of query builders.
  * @param <TSource> The type of the elements of the source collection
  */
-public abstract class QueryBuilderBase<TSource> {
-    ArrayList<TSource> source;
+public abstract class QueryBuilderBase<TSource> extends Enumerable<TSource> {
 
     QueryBuilderBase(Collection<TSource> source) {
-        this.source = new ArrayList<>(source);
-    }
-
-    /**
-     * Returns the underlying collection as a List.
-     * @return The underlying collection
-     */
-    public List<TSource> toList() {
-        return source;
-    }
-
-    /**
-     * Returns the underlying collection as a set.
-     * @return The underlying collection
-     */
-    public Set<TSource> toSet() {
-        return new HashSet<>(source);
-    }
-
-    /**
-     * Returns the underlying collection as an array.
-     * @return The underlying collection
-     */
-    public TSource[] toArray() {
-        return (TSource[]) source.toArray();
-    }
-
-    /**
-     * Returns the underlying collection as a map using a kay and value generator.
-     * @param keyGenerator A method that converts an element to a key
-     * @param elementGenerator A method that converts an element to an element of the map
-     * @param <TKey> The type of the key
-     * @param <TElement> The type of the element
-     * @return The map created from the elements
-     */
-    public <TKey, TElement> Map<TKey, TElement> toMap(Func1<TSource, TKey> keyGenerator, Func1<TSource, TElement> elementGenerator) {
-        var map = new HashMap<TKey, TElement>();
-
-        for (var element : source) {
-            map.put(keyGenerator.execute(element), elementGenerator.execute(element));
-        }
-
-        return map;
+        super(source);
     }
 
     /**
@@ -340,14 +298,8 @@ public abstract class QueryBuilderBase<TSource> {
      * @return The smallest element in the collection
      */
     public TSource min() {
-        return findExtreme((min, current) -> {
-            if (!(min instanceof Comparable)) {
-                throw new IllegalStateException("The elements must implement the Comparable<TSource> interface to be able to be compared without a comparator.");
-            }
-
-            var comparableMin = (Comparable<TSource>) min;
-            return comparableMin.compareTo(current) > 0;
-        });
+        return aggregate(first(),
+                (min, element) -> ((Comparable<TSource>)min).compareTo(element) < 0 ? min : element);
     }
 
     /**
@@ -356,7 +308,8 @@ public abstract class QueryBuilderBase<TSource> {
      * @return The smallest element in the collection
      */
     public TSource min(Comparator<TSource> comparator) {
-        return min(e -> e, comparator);
+        return aggregate(first(),
+                (min, element) -> comparator.compare(min, element) < 0 ? min : element);
     }
 
     /**
@@ -365,8 +318,10 @@ public abstract class QueryBuilderBase<TSource> {
      * @param <TProperty> The type of the selected property
      * @return The element with the smallest selected property
      */
-    public <TProperty extends Comparable<TProperty>> TSource min(Func1<TSource, TProperty> selector) {
-        return findExtreme((min, current) -> selector.execute(min).compareTo(selector.execute(current)) > 0);
+    public <TProperty extends Comparable<TProperty>> TProperty min(Func1<TSource, TProperty> selector) {
+        return aggregate(first(),
+                (min, element) -> selector.execute(min).compareTo(selector.execute(element)) < 0 ? min : element,
+                selector);
     }
 
     /**
@@ -376,8 +331,20 @@ public abstract class QueryBuilderBase<TSource> {
      * @param <TProperty> The type of the selected property
      * @return The element with the smallest selected property
      */
-    public <TProperty> TSource min (Func1<TSource, TProperty> selector, Comparator<TProperty> comparator) {
-        return findExtreme((min, current) -> comparator.compare(selector.execute(min), selector.execute(current)) > 0);
+    public <TProperty> TProperty min(Func1<TSource, TProperty> selector, Comparator<TProperty> comparator) {
+        return aggregate(first(),
+                (min, element) -> comparator.compare(selector.execute(min), selector.execute(element)) < 0 ? min : element,
+                selector);
+    }
+
+    public <TProperty extends Comparable<TProperty>> TSource minBy(Func1<TSource, TProperty> selector) {
+        return aggregate(first(),
+                (min, element) -> selector.execute(min).compareTo(selector.execute(element)) < 0 ? min : element);
+    }
+
+    public <TProperty> TSource minBy(Func1<TSource, TProperty> selector, Comparator<TProperty> comparator) {
+        return aggregate(first(),
+                (min, element) -> comparator.compare(selector.execute(min), selector.execute(element)) < 0 ? min : element);
     }
 
     /**
@@ -385,14 +352,8 @@ public abstract class QueryBuilderBase<TSource> {
      * @return The largest element in the collection
      */
     public TSource max() {
-        return findExtreme((max, current) -> {
-            if (!(max instanceof Comparable)) {
-                throw new IllegalStateException("The elements must implement the Comparable<TSource> interface to be able to be compared without a comparator.");
-            }
-
-            var comparableMax = (Comparable<TSource>) max;
-            return comparableMax.compareTo(current) < 0;
-        });
+        return aggregate(first(),
+                (max, element) -> ((Comparable<TSource>)max).compareTo(element) > 0 ? max : element);
     }
 
     /**
@@ -401,7 +362,8 @@ public abstract class QueryBuilderBase<TSource> {
      * @return The largest element of the collection
      */
     public TSource max(Comparator<TSource> comparator) {
-        return max(e -> e, comparator);
+        return aggregate(first(),
+                (max, element) -> comparator.compare(max, element) > 0 ? max : element);
     }
 
     /**
@@ -410,8 +372,10 @@ public abstract class QueryBuilderBase<TSource> {
      * @param <TProperty> The type of the selected property
      * @return The element with the largest selected property
      */
-    public <TProperty extends Comparable<TProperty>> TSource max(Func1<TSource, TProperty> selector) {
-        return findExtreme((max, current) -> selector.execute(max).compareTo(selector.execute(current)) < 0);
+    public <TProperty extends Comparable<TProperty>> TProperty max(Func1<TSource, TProperty> selector) {
+        return aggregate(first(), 
+            (max, element) -> selector.execute(max).compareTo(selector.execute(element)) > 0 ? max : element,
+            selector);
     }
 
     /**
@@ -421,23 +385,20 @@ public abstract class QueryBuilderBase<TSource> {
      * @param <TProperty> The type of the selected property
      * @return The element with the largest selected property
      */
-    public <TProperty> TSource max(Func1<TSource, TProperty> selector, Comparator<TProperty> comparator) {
-        return findExtreme((max, current) -> comparator.compare(selector.execute(max), selector.execute(current)) < 0);
+    public <TProperty> TProperty max(Func1<TSource, TProperty> selector, Comparator<TProperty> comparator) {
+        return aggregate(first(), 
+            (max, element) -> comparator.compare(selector.execute(max), selector.execute(element)) > 0 ? max : element,
+            selector);
+    }
+    
+    public <TProperty extends Comparable<TProperty>> TSource maxBy(Func1<TSource, TProperty> selector) {
+        return aggregate(first(),
+            (max, element) -> selector.execute(max).compareTo(selector.execute(element)) > 0 ? max : element);
     }
 
-    private TSource findExtreme(Func2<TSource, TSource, Boolean> comparator) {
-        if (source.isEmpty()) {
-            throw new IllegalStateException("The collection is empty.");
-        }
-
-        var extreme = source.get(0);
-        for (int i = 1; i < source.size(); i++) {
-            if (comparator.execute(extreme, source.get(i))) {
-                extreme = source.get(i);
-            }
-        }
-
-        return extreme;
+    public <TProperty> TSource maxBy(Func1<TSource, TProperty> selector, Comparator<TProperty> comparator) {
+        return aggregate(first(),
+            (max, element) -> comparator.compare(selector.execute(max), selector.execute(element)) > 0 ? max : element);
     }
 
     /**
@@ -463,14 +424,8 @@ public abstract class QueryBuilderBase<TSource> {
      * @param <TProperty> The type of the selected property
      * @return The sum of the selected property as a double
      */
-    public <TProperty extends Number> double sum(Func1<TSource, TProperty> selector) {
-        double sum = 0;
-
-        for (var element : source) {
-            sum += selector.execute(element).doubleValue();
-        }
-
-        return sum;
+    public <TProperty extends Number> Number sum(Func1<TSource, TProperty> selector) {
+        return when(e -> true).thenSum(selector);
     }
 
     /**
@@ -480,25 +435,15 @@ public abstract class QueryBuilderBase<TSource> {
      * @return The average of the selected property as a double
      */
     public <TProperty extends Number> double average(Func1<TSource, TProperty> selector) {
-        return sum(selector) / count();
+        return sum(selector).doubleValue() / count();
     }
 
     /**
      * Sums the elements in the collection if the elements are of a number type.
      * @return The sum of the elements as a double.
      */
-    public double sum() {
-        double sum = 0;
-
-        for (var element : source) {
-            if (!(element instanceof Number)) {
-                throw new IllegalStateException("The collection must contain numbers to be summed.");
-            }
-
-            sum += ((Number) element).doubleValue();
-        }
-
-        return sum;
+    public Number sum() {
+        return when(e -> true).thenSum(e -> (Number)e);
     }
 
     /**
@@ -506,7 +451,7 @@ public abstract class QueryBuilderBase<TSource> {
      * @return The average of the elements as a double.
      */
     public double average() {
-        return sum() / count();
+        return sum().doubleValue() / count();
     }
 
     private void validateAmount(int amount) {

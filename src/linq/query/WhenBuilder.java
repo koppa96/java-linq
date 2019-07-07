@@ -2,20 +2,19 @@ package linq.query;
 
 import linq.lambda.Action;
 import linq.lambda.Func1;
+import linq.Enumerable;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
 /**
  * A builder class for when statements, that are conditionally executed.
  * @param <TSource> The type of the elements that are in the underlying collection
  */
-public class WhenBuilder<TSource> {
-    private ArrayList<TSource> source;
+public class WhenBuilder<TSource> extends Enumerable<TSource> {
     private Func1<TSource, Boolean> condition;
 
     WhenBuilder(Collection<TSource> source, Func1<TSource, Boolean> condition) {
-        this.source = new ArrayList<>(source);
+        super(source);
         this.condition = condition;
     }
 
@@ -63,5 +62,26 @@ public class WhenBuilder<TSource> {
         }
 
         return count;
+    }
+
+    public <TProperty extends Number> Number thenSum(Func1<TSource, TProperty> selector) {
+        return aggregate(0.0,
+            (sum, element) -> sum + selector.execute(element).doubleValue());
+    }
+
+    public int thenSumInt(Func1<TSource, Integer> selector) {
+        return thenSum(selector).intValue();
+    }
+
+    public long thenSumLong(Func1<TSource, Long> selector) {
+        return thenSum(selector).longValue();
+    }
+
+    public double thenSumDouble(Func1<TSource, Double> selector) {
+        return thenSum(selector).doubleValue();
+    }
+
+    public float thenSumFloet(Func1<TSource, Float> selector) {
+        return thenSum(selector).floatValue();
     }
 }

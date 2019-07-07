@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_linq" default="compile.module.linq">
+  <dirname property="module.linq.basedir" file="${ant.file.module_linq}"/>
+  
+  <property name="module.jdk.home.linq" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.linq" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.linq" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.linq" value="-encoding UTF-8 -source 12 -target 12 ${compiler.args}"/>
+  
+  <property name="linq.output.dir" value="${module.linq.basedir}/out/production/Linq"/>
+  <property name="linq.testoutput.dir" value="${module.linq.basedir}/out/test/Linq"/>
+  
+  <path id="linq.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="linq.module.production.classpath">
+    <path refid="${module.jdk.classpath.linq}"/>
+    <path refid="library.junit:junit:4.0.classpath"/>
+  </path>
+  
+  <path id="linq.runtime.production.module.classpath">
+    <pathelement location="${linq.output.dir}"/>
+    <path refid="library.junit:junit:4.0.classpath"/>
+  </path>
+  
+  <path id="linq.module.classpath">
+    <path refid="${module.jdk.classpath.linq}"/>
+    <pathelement location="${linq.output.dir}"/>
+    <path refid="library.junit:junit:4.0.classpath"/>
+  </path>
+  
+  <path id="linq.runtime.module.classpath">
+    <pathelement location="${linq.testoutput.dir}"/>
+    <pathelement location="${linq.output.dir}"/>
+    <path refid="library.junit:junit:4.0.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.linq">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.linq">
+    <patternset refid="excluded.from.module.linq"/>
+  </patternset>
+  
+  <path id="linq.module.sourcepath">
+    <dirset dir="${module.linq.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  <path id="linq.module.test.sourcepath">
+    <dirset dir="${module.linq.basedir}">
+      <include name="test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.linq" depends="compile.module.linq.production,compile.module.linq.tests" description="Compile module Linq"/>
+  
+  <target name="compile.module.linq.production" depends="register.custom.compilers" description="Compile module Linq; production classes">
+    <mkdir dir="${linq.output.dir}"/>
+    <javac2 destdir="${linq.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.linq}/javac">
+      <compilerarg line="${compiler.args.linq}"/>
+      <bootclasspath refid="linq.module.bootclasspath"/>
+      <classpath refid="linq.module.production.classpath"/>
+      <src refid="linq.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.linq"/>
+    </javac2>
+    
+    <copy todir="${linq.output.dir}">
+      <fileset dir="${module.linq.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.linq.tests" depends="register.custom.compilers,compile.module.linq.production" description="compile module Linq; test classes" unless="skip.tests">
+    <mkdir dir="${linq.testoutput.dir}"/>
+    <javac2 destdir="${linq.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.linq}/javac">
+      <compilerarg line="${compiler.args.linq}"/>
+      <bootclasspath refid="linq.module.bootclasspath"/>
+      <classpath refid="linq.module.classpath"/>
+      <src refid="linq.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.linq"/>
+    </javac2>
+    
+    <copy todir="${linq.testoutput.dir}">
+      <fileset dir="${module.linq.basedir}/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.linq" description="cleanup module">
+    <delete dir="${linq.output.dir}"/>
+    <delete dir="${linq.testoutput.dir}"/>
+  </target>
+</project>
